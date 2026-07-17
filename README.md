@@ -44,24 +44,59 @@ FBA organizes supervision by capability dependency rather than mixing all availa
 2. **Domain-bridge convergence** introduces target-related coastal, port, water, dock, and ship scenes across RGB, SAR, PAN, and NIR, with modality-aware construction and verification.
 3. **Evidence-grounded scenario tuning** focuses on presence validation, relation reasoning, grid localization, functional-zone interpretation, uncertainty, hard-negative rejection, and grounded reporting.
 
-## Data and evaluation
+## Resource construction
 
-CPRS progressively shifts supervision from broad overhead semantics to multi-source bridge-domain evidence and finally to harbor-specialized behavior. Scenario-EG contains 53,000 train-only records over 8,703 images. The public release will distinguish redistributable resources from source manifests and reconstruction scripts according to the underlying licenses.
+CPRS and HarborEval are maintained as separate, audited resources rather than assembled through raw dataset or benchmark merging. CPRS applies a common pipeline of modality normalization, evidence grounding, instruction synthesis, verifier-based repair, image deduplication, and leakage removal. HarborEval uses source-record holdout and a public/private field split so that answer-bearing evidence never enters training records or model prompts.
 
-HarborEval evaluates four capability groups:
+<p align="center">
+  <a href="assets/resource_workflows.svg"><img src="assets/resource_workflows.svg" alt="Audited CPRS and HarborEval construction workflows" width="100%"></a>
+</p>
 
-| Capability | Representative tracks |
+### CPRS curation at a glance
+
+- **RS-Anchor:** 3,135,250 source samples → 569,853 unique image-caption pairs from eight public datasets, after caption cleaning, image-level deduplication, scene classification, diversity-aware sampling, and visible-semantic filtering.
+- **Bridging-Conv:** 187,296 SFT records—99,088 RGB, 29,984 SAR, 28,475 NIR, and 29,749 PAN. Its RGB pool includes 59,453 water/coast/port/dock/ship-related records. Construction applies modality-aware rewriting plus staged evidence grounding, instruction synthesis, and verify/rewrite/drop decisions.
+- **Scenario-EG:** 53,000 train-only SFT records over 8,703 RGB, SAR, PAN, and NIR images, covering presence validation, relation reasoning, grid grounding, functional-zone interpretation, controlled negatives, response replay, and benchmark-trace removal.
+
+Audit information such as source metadata, teacher notes, verifier rationales, construction tags, and retry outcomes supports reproducibility but is removed before student-model export. Resources that cannot be redistributed will be represented by source manifests and reconstruction scripts where their licenses permit.
+
+### HarborEval: eight diagnostic tracks
+
+| Track (items) | Diagnostic role |
 |---|---|
-| Perception | Object evidence, functional zones, modality recognition |
-| Spatial understanding | Relations and multi-cell grid localization |
-| Robustness | Negative cases, uncertainty, and rejection |
-| Generation | Evidence-grounded harbor reporting |
+| **T1 (162)** | Object/scene VQA |
+| **T2 (182)** | Functional-zone interpretation |
+| **T3 (183)** | Spatial-relation reasoning |
+| **T4 (164)** | Multi-cell grid grounding |
+| **T5 (171)** | Sensor-aware observability |
+| **T6 (123)** | Evidence judgment and uncertainty |
+| **T7 (79)** | Evidence-grounded report generation |
+| **T8 (181)** | Non-harbor and near-domain rejection |
 
-The benchmark includes structured questions and open-ended reporting/rejection cases across the four sensor modalities.
+HarborEval contains **1,245 items over 471 unique images**, including **1,154 structured items** and **91 open-ended description or rejection items**. During inference, a model receives only the image, question, and answer choices when applicable. Answers, evidence annotations, accepted labels or grid cells, references, forbidden claims, and scoring rubrics remain private and are merged only after inference. Once a source record is assigned to HarborEval, its derived conversations are excluded from every training export.
+
+## Evidence-grounded examples
+
+The four examples below illustrate the response forms targeted by Scenario-EG and diagnosed by HarborEval: functional captioning in RGB, geometry-based grid grounding in PAN, evidence-based VQA in SAR, and spatial-relation reasoning in NIR. The goal is not identical wording across sensors, but claims that remain compatible with what each modality can actually reveal.
+
+<p align="center">
+  <a href="assets/evidence_grounded_examples.png"><img src="assets/evidence_grounded_examples.png" alt="Four evidence-grounded harbor examples across RGB, PAN, SAR, and NIR" width="100%"></a>
+</p>
+
+<details>
+<summary><strong>Positive vs. hard-negative evidence audit</strong></summary>
+
+Vessel or water keywords alone do not justify a harbor label. Positive records must contain relational evidence such as docked vessels aligned with piers, quays, basins, or land-based port facilities. Isolated ships, ambiguous coastlines, and low-information water scenes instead receive negative or uncertainty-compatible responses.
+
+<p align="center">
+  <a href="assets/positive_negative_audit.png"><img src="assets/positive_negative_audit.png" alt="Positive and hard-negative evidence audit for harbor-scene recognition" width="72%"></a>
+</p>
+
+</details>
 
 ## Results
 
-### Controlled route comparison on HarborEval
+### 1. Controlled route comparison and HarborEval diagnosis
 
 | Training route | LLaVA-v1.5 | Qwen3-VL |
 |---|---:|---:|
@@ -71,7 +106,61 @@ The benchmark includes structured questions and open-ended reporting/rejection c
 
 FBA achieves the highest HarborEval score in both controlled backbone families. The LLaVA-v1.5 route improves from **57.95 to 70.29** over Direct-SFT. The same pattern holds on Qwen3-VL, where FBA also exceeds Direct-SFT and the strongest collapsed baseline.
 
-Against the representative RS-MLLMs evaluated in the paper, both FBA variants also rank first on HarborEval, the harbor-related VRSBench/RSVQA subsets, and OpenEval. The Qwen3-VL variant obtains **67.77** on the VRSBench subset, **63.00** on the RSVQA subset, and **76.67** on OpenEval.
+<details>
+<summary><strong>Direct-SFT → FBA track-level breakdown</strong></summary>
+
+| HarborEval component | LLaVA-v1.5 | Qwen3-VL |
+|---|---:|---:|
+| Overall | 57.95 → **70.29** | 81.09 → **83.37** |
+| Object | 75.07 → 73.47 | 87.99 → **92.42** |
+| Functional zone | 66.67 → **67.22** | 78.33 → **81.11** |
+| Modality | 50.88 → **80.12** | 81.29 → **82.46** |
+| Spatial relation | 60.67 → **69.10** | 81.46 → **83.15** |
+| Grid grounding | 48.37 → 43.82 | 66.06 → **68.61** |
+| Hard negative | 52.03 → **69.11** | 78.05 → **79.67** |
+| Rejection | 37.28 → **85.80** | 95.27 → **98.22** |
+| Report generation | 72.60 → **73.70** | 80.23 → **81.32** |
+
+For LLaVA-v1.5, the overall gain is driven especially by modality understanding, hard-negative handling, rejection, and reporting, while object recognition and grid grounding remain slightly lower than Direct-SFT. Qwen3-VL improves across all eight diagnostic components.
+
+</details>
+
+### 2. Comparison with existing RS-MLLMs
+
+| Model | Params | Data scale | HarborEval | VRSBench | RSVQA | OpenEval |
+|---|---:|---:|---:|---:|---:|---:|
+| GeoChat | 7B | 318K* | 47.49 | 53.44 | 51.46 | 21.78 |
+| SkyEyeGPT | 7B | 968K | 28.28 | 36.72 | 36.72 | 12.33 |
+| LHRS-Bot-Nova | 7B | 2.02M | 39.73 | 28.40 | 31.15 | 22.96 |
+| SkySenseGPT | 7B | 3.00M | 47.24 | 42.99 | 42.98 | 35.78 |
+| **FBA (LLaVA-v1.5)** | 7B | **810K** | **70.29** | **57.62** | **53.96** | **61.47** |
+| **FBA (Qwen3-VL)** | 8B | **810K** | **83.37** | **67.77** | **63.00** | **76.67** |
+
+Both FBA variants obtain the strongest scores among the compared models on all four evaluation settings, while using approximately 810K curated supervision records. Data-scale values are contextual rather than a controlled fairness claim; `318K*` for GeoChat excludes its inherited general-purpose LLaVA data.
+
+### 3. Stage-wise capability trajectory
+
+| Backbone | Checkpoint | RS-VL | MS | HE | VRS | RQA | OE |
+|---|---|---:|---:|---:|---:|---:|---:|
+| LLaVA-v1.5 | +S1 | 69.71 | 52.97 | 29.44 | 49.54 | 37.00 | 42.23 |
+| LLaVA-v1.5 | +S2 | 87.53 | **73.55** | 35.61 | 54.88 | 47.55 | 58.01 |
+| LLaVA-v1.5 | +S3 | **89.16** | 68.04 | **70.29** | **57.62** | **53.96** | **61.47** |
+| Qwen3-VL | Base | 90.40 | 69.60 | 70.37 | 57.02 | 50.63 | 65.48 |
+| Qwen3-VL | +S1 | **95.29** | 70.32 | 77.26 | 51.14 | 54.66 | 60.03 |
+| Qwen3-VL | +S2 | 93.37 | **79.77** | 71.80 | 66.58 | 57.30 | 60.15 |
+| Qwen3-VL | +S3 | 92.22 | 76.54 | **83.37** | **67.77** | **63.00** | **76.67** |
+
+The trajectory is role-specific rather than uniformly monotonic: S1 establishes strong RS visual-language alignment, S2 produces the highest multi-source diagnostic score, and S3 delivers the strongest final scenario performance. RS-VL and MS denote intermediate diagnostics; HE, VRS, RQA, and OE denote HarborEval, VRSBench, RSVQA, and OpenEval.
+
+### 4. Supervision-role replacement controls
+
+| Role | Replacement → intended supervision | RS-VL | MS | HE |
+|---|---|---:|---:|---:|
+| **D1 anchoring** | Generic image-text → RS-Anchor | 76.42 → **89.16** | 64.49 → **68.04** | 60.36 → **70.29** |
+| **D2 bridging** | Non-bridging → Bridging-Conv | 84.36 → **89.16** | 66.90 → **68.04** | 57.11 → **70.29** |
+| **D3 specialization** | Non-EG → Scenario-EG | 88.97 → **89.16** | 67.78 → **68.04** | 50.12 → **70.29** |
+
+Replacing each intended supervision layer weakens the capability it is designed to supply. RS-Anchor contributes most clearly to RS-VL anchoring, Bridge-Conv improves multi-source and downstream adaptation, and Scenario-EG produces the largest HarborEval recovery. This compact control view focuses on the intermediate diagnostics and HarborEval that directly test the three capability roles.
 
 All scores use a 0-100 scale. Evaluation inputs, semantic prompts, decoding policies, answer normalization, and scoring rules are held consistent within each controlled comparison.
 
