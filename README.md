@@ -46,7 +46,7 @@ FBA organizes supervision by capability dependency rather than mixing all availa
 
 ## Resource construction
 
-CPRS and HarborEval are maintained as separate, audited resources rather than assembled through raw dataset or benchmark merging. CPRS applies a common pipeline of modality normalization, evidence grounding, instruction synthesis, verifier-based repair, image deduplication, and leakage removal. HarborEval uses source-record holdout and a public/private field split so that answer-bearing evidence never enters training records or model prompts.
+CPRS and HarborEval are maintained as separate, audited resources; raw training datasets and evaluation benchmarks are never merged directly.
 
 <p align="center">
   <a href="assets/cprs_progressive_data_curation.png"><img src="assets/cprs_progressive_data_curation.png" alt="Progressive data curation of the three-layer CPRS dataset" width="100%"></a>
@@ -54,27 +54,7 @@ CPRS and HarborEval are maintained as separate, audited resources rather than as
 
 The CPRS overview from the paper connects four parts of the dataset design: the stage-wise shift from **RS-Anchor** to **Bridging-Conv** and **Scenario-EG**, the increasing concentration of harbor supervision, broad coastal geographic coverage, and image-level curation followed by staged multi-teacher SFT synthesis and manual inspection.
 
-**CPRS training-supervision flow**
-
-```mermaid
-flowchart LR
-    C1["Source collection"] --> C2["Modality normalization"]
-    C2 --> C3["Evidence grounding and SMT synthesis"]
-    C3 --> C4["Verification, repair, and deduplication"]
-    C4 --> C5["Train-only export"]
-```
-
-**HarborEval diagnostic-benchmark flow**
-
-```mermaid
-flowchart LR
-    H1["Record selection"] --> H2["Source-record holdout"]
-    H2 --> H3["Eight-track construction"]
-    H3 --> H4["Benchmark audit"]
-    H4 --> H5["Frozen evaluation"]
-```
-
-> **Separation rule:** HarborEval source records never enter a training export; private answers and scoring fields are joined only after inference.
+**CPRS construction and audit.** The three supervision layers share one evidence-centered curation policy. Heterogeneous sources are normalized into image-text or ShareGPT-style records; image-text data retain one caption per unique image, while instruction conversations are restricted to visible evidence. For SAR, NIR, and PAN, wording is further constrained by what each sensor can support. Staged multi-teacher distillation assigns fixed roles to metadata grounding, instruction synthesis, and evidence verification, after which candidates are retained, rewritten, or discarded. Source metadata, teacher notes, verifier rationales, construction tags, and retry outcomes are preserved for audit but removed from student-model exports, together with malformed records, duplicate references, benchmark traces, and modality-incompatible claims.
 
 ### CPRS curation at a glance
 
@@ -82,7 +62,7 @@ flowchart LR
 - **Bridging-Conv:** 187,296 SFT records—99,088 RGB, 29,984 SAR, 28,475 NIR, and 29,749 PAN. Its RGB pool includes 59,453 water/coast/port/dock/ship-related records. Construction applies modality-aware rewriting plus staged evidence grounding, instruction synthesis, and verify/rewrite/drop decisions.
 - **Scenario-EG:** 53,000 train-only SFT records over 8,703 RGB, SAR, PAN, and NIR images, covering presence validation, relation reasoning, grid grounding, functional-zone interpretation, controlled negatives, response replay, and benchmark-trace removal.
 
-Audit information such as source metadata, teacher notes, verifier rationales, construction tags, and retry outcomes supports reproducibility but is removed before student-model export. Resources that cannot be redistributed will be represented by source manifests and reconstruction scripts where their licenses permit.
+Resources that cannot be redistributed will be represented by source manifests and reconstruction scripts where their licenses permit.
 
 ### HarborEval: eight diagnostic tracks
 
@@ -97,7 +77,9 @@ Audit information such as source metadata, teacher notes, verifier rationales, c
 | **T7 (79)** | Evidence-grounded report generation |
 | **T8 (181)** | Non-harbor and near-domain rejection |
 
-HarborEval contains **1,245 items over 471 unique images**, including **1,154 structured items** and **91 open-ended description or rejection items**. During inference, a model receives only the image, question, and answer choices when applicable. Answers, evidence annotations, accepted labels or grid cells, references, forbidden claims, and scoring rubrics remain private and are merged only after inference. Once a source record is assigned to HarborEval, its derived conversations are excluded from every training export.
+**Construction and audit.** HarborEval is built from harbor and non-harbor remote-sensing records as item-level diagnostic questions. Harbor records support object and scene recognition, functional-zone interpretation, spatial relations, grid localization, sensor-aware observability, evidence judgment, and grounded reporting; non-harbor records support rejection-oriented questions. Cleaning removes weakly visual or metadata-dependent questions, malformed options, duplicate image references, benchmark-specific traces, and sensor-incompatible statements. Accepted alternatives are retained only when supported by audited visual evidence.
+
+HarborEval contains **1,245 items over 471 unique images**, including **1,154 structured items** and **91 open-ended description or rejection items**. Once a source record is assigned to HarborEval, every derived conversation is excluded from training. Public inference records contain only the image, question, and answer choices when applicable; answers, evidence annotations, accepted labels or grid cells, references, forbidden claims, and scoring rubrics remain private and are merged only after inference.
 
 ### Public sample showcases
 
