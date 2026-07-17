@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite the accompanying paper."
+title: "Filling Before Advancing: Capability-Gap-Driven Post-Training for Scenario-Specialized Remote Sensing MLLMs"
+type: software
+authors:
+  - family-names: "TO_BE_FILLED"
+    given-names: "TO_BE_FILLED"
+repository-code: "https://github.com/ORG/REPO"
+version: "0.1.0"
+date-released: "YYYY-MM-DD"
+license: "TO_BE_SELECTED"
+
