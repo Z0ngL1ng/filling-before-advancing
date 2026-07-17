@@ -1,0 +1,118 @@
+[
+  {
+    "id": "llava_s2_s1_replay_llava_s1_080506",
+    "image": "images/s2_01_rgb_s1_instruction_preservation_replay.png",
+    "modality": "RGB",
+    "task_type": null,
+    "transform": "S1_instruction_preservation_replay",
+    "conversations": [
+      {
+        "role": "user",
+        "content": "Provide a grounded one-sentence description of this remote-sensing scene. <image>"
+      },
+      {
+        "role": "assistant",
+        "content": "A grassy airfield with intersecting paved paths and a small building is bordered by dense forest and a road, adjacent to a large body of dark water with a pier extending into it."
+      }
+    ],
+    "showcase_tags": [
+      "modality_adaptation",
+      "S1_instruction_preservation_replay"
+    ],
+    "image_metadata": {
+      "sha256": "52d1a485aa0daff461ccc53b8c63ab98527854db18f33896d6ebd8428cd3bcb2",
+      "dhash": "2e56176fc1a0a001",
+      "bytes": 1714187,
+      "width": 1118,
+      "height": 1118,
+      "format": "PNG"
+    }
+  },
+  {
+    "id": "llava_s2_sar_sar_stage2_019637",
+    "image": "images/s2_02_sar_modality_boundary.jpg",
+    "modality": "SAR",
+    "task_type": "vqa",
+    "transform": "modality_boundary",
+    "conversations": [
+      {
+        "role": "user",
+        "content": "This is a SAR image. Can the exact operational status of a vessel-like return be confirmed from one image? <image>"
+      },
+      {
+        "role": "assistant",
+        "content": "Cannot determine. A vessel-like return may be visible, but exact operational status is not established by a single SAR image."
+      }
+    ],
+    "showcase_tags": [
+      "modality_adaptation",
+      "modality_boundary"
+    ],
+    "image_metadata": {
+      "sha256": "bb16bbe5d7ccf0b0c3345d31c1e3d60850322c68dafb4ccb210559155553ddd3",
+      "dhash": "0000208028282000",
+      "bytes": 4467,
+      "width": 256,
+      "height": 256,
+      "format": "JPEG"
+    }
+  },
+  {
+    "id": "llava_s2_pan_pan_stage2_025560",
+    "image": "images/s2_03_pan_modality_grounded_prompt.png",
+    "modality": "PAN",
+    "task_type": "description",
+    "transform": "modality_grounded_prompt",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image> This is a panchromatic image. Use grayscale tone, shape, texture, edges, and layout; do not infer natural color. Provide an evidence-grounded structural description of this remote-sensing image: characterize dominant land-cover geometry, edge structure, and spatial arrangement. Identify structures by shape and boundary signature, not by color or material."
+      },
+      {
+        "from": "gpt",
+        "value": "A wide, smooth waterway stretches diagonally across the scene, separating two distinct land areas. On the right bank, a dense cluster of small, bright rectangular buildings forms a grid-like town adjacent to a linear road. A narrow pier extends from the shore into the water, ending near a small, bright object that resembles a ship. The left bank features a darker, irregular terrain with scattered linear features, contrasting with the organized layout on the opposite side."
+      }
+    ],
+    "showcase_tags": [
+      "modality_adaptation",
+      "modality_grounded_prompt"
+    ],
+    "image_metadata": {
+      "sha256": "1527de633f6183338312c9bdc922315023579c1e6d0cb0c510097acaf54c28e7",
+      "dhash": "404941030e1e7df8",
+      "bytes": 38421,
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    }
+  },
+  {
+    "id": "llava_s2_nir_nir_stage2_006765",
+    "image": "images/s2_04_nir_modality_grounded_prompt.png",
+    "modality": "NIR",
+    "task_type": "description",
+    "transform": "modality_grounded_prompt",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image> This is a near-infrared image. Separate reflectance evidence from true natural color and avoid unsupported material claims. Describe the scene as an image caption. Name clear objects such as ships, buildings, roads, water areas, bridges, runways, fields, docks, or piers when visible."
+      },
+      {
+        "from": "gpt",
+        "value": "A large water area runs through the center of the scene, bordered by a dense cluster of buildings on the left and a mix of fields and structures on the right. A long, straight road-like feature crosses the water on a bridge, connecting the two land areas. Along the water’s edge, there are several ship-like objects docked at a pier. The image is truncated on the top and bottom, showing only a portion of the surrounding land and water."
+      }
+    ],
+    "showcase_tags": [
+      "modality_adaptation",
+      "modality_grounded_prompt"
+    ],
+    "image_metadata": {
+      "sha256": "904f8bee3d2c53edebf9d044419553a09594d96851350691e3b5d27d9acfb164",
+      "dhash": "02c6662010989287",
+      "bytes": 65882,
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    }
+  }
+]

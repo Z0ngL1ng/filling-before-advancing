@@ -1,0 +1,11 @@
+{
+  "name": "Remote-sensing benchmark input showcase",
+  "sample_only": true,
+  "answers_included": false,
+  "benchmarks": {
+    "HarborEval-0617": 2,
+    "OpenEval": 2,
+    "RSVQA-Harbor": 2
+  },
+  "held_out_policy": "See PUBLIC_EXAMPLE_EXCLUSIONS.json before reporting private benchmark scores."
+}

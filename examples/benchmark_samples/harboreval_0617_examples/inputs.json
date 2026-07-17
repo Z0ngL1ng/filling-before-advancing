@@ -1,0 +1,92 @@
+[
+  {
+    "id": "harboreval_mini_000444",
+    "image": "images/harboreval_01_t4_grid_grounding.png",
+    "question": "The image is divided into a 3x3 grid: top-left, top-center, top-right, middle-left, middle-center, middle-right, bottom-left, bottom-center, bottom-right. Which of the following grid cells definitely contains container stacks? Select all correct grid cell names.",
+    "choices": [
+      {
+        "key": "top-left",
+        "text": "top-left"
+      },
+      {
+        "key": "top-center",
+        "text": "top-center"
+      },
+      {
+        "key": "top-right",
+        "text": "top-right"
+      },
+      {
+        "key": "middle-left",
+        "text": "middle-left"
+      },
+      {
+        "key": "middle-center",
+        "text": "middle-center"
+      },
+      {
+        "key": "middle-right",
+        "text": "middle-right"
+      },
+      {
+        "key": "bottom-left",
+        "text": "bottom-left"
+      },
+      {
+        "key": "bottom-center",
+        "text": "bottom-center"
+      },
+      {
+        "key": "bottom-right",
+        "text": "bottom-right"
+      }
+    ],
+    "question_type": "grid_multi_select",
+    "track": "T4_grid_grounding",
+    "modality": "SAR",
+    "difficulty": "intermediate",
+    "metric": "grid_set_f1",
+    "publication_status": "public_showcase_example_exclude_from_held_out_scoring",
+    "image_metadata": {
+      "sha256": "0d7b44e13ffe1685e0102fb074ee4b6f05b53b728fb5f93b79cce20d2f5fbfc6",
+      "dhash": "9a47970f0d33e697",
+      "bytes": 432828,
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    }
+  },
+  {
+    "id": "harboreval_v12_t6_000076",
+    "image": "images/harboreval_02_t6_evidence_calibrated_judgment.png",
+    "question": "Claim: A container stack is visible in this image.\nIs this claim supported by visible evidence in the image?\nChoose No only when the visible evidence clearly contradicts the claim or clearly shows the claimed object is absent; choose Cannot determine when the image is insufficient or ambiguous.",
+    "choices": [
+      {
+        "key": "A",
+        "text": "Yes"
+      },
+      {
+        "key": "B",
+        "text": "Cannot determine"
+      },
+      {
+        "key": "C",
+        "text": "No"
+      }
+    ],
+    "question_type": "yes_no_unknown",
+    "track": "T6_evidence_calibrated_judgment",
+    "modality": "RGB",
+    "difficulty": "intermediate",
+    "metric": "visual_evidence_decision_score",
+    "publication_status": "public_showcase_example_exclude_from_held_out_scoring",
+    "image_metadata": {
+      "sha256": "22cd6971eb96a92696d389ec51657187f0d383c4dee6f0a0644a565bab2a0442",
+      "dhash": "0f070506232fffc3",
+      "bytes": 227445,
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    }
+  }
+]

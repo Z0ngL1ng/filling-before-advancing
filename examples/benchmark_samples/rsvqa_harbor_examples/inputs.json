@@ -1,0 +1,38 @@
+[
+  {
+    "sample_id": "rsvqa_harbor_ref_v3_000685",
+    "image": "images/rsvqa_01_presence_non_harbor.png",
+    "question": "Is a medium building present in the image?",
+    "question_type": "presence",
+    "scene_label": "non_harbor",
+    "subset": "non_harbor",
+    "task_family": "rs_retention_generic",
+    "publication_status": "public_dataset_question_example",
+    "image_metadata": {
+      "sha256": "85a5a1daebdfd0707e95f2c5ac29d0424e6a0604eed3f6e336c6a52e7c850f57",
+      "dhash": "f6d7b226c8c8e640",
+      "bytes": 429730,
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    }
+  },
+  {
+    "sample_id": "rsvqa_harbor_ref_v3_000079",
+    "image": "images/rsvqa_02_count_harbor.png",
+    "question": "What is the number of rectangular piers in the image?",
+    "question_type": "count",
+    "scene_label": "harbor",
+    "subset": "harbor",
+    "task_family": "count_area_grounding",
+    "publication_status": "public_dataset_question_example",
+    "image_metadata": {
+      "sha256": "ae14bf76a955db026a8246a8085c9479bc3a7a913b2212dbb3e8ac3a5f7ef4aa",
+      "dhash": "8010cc309ccd9cda",
+      "bytes": 393161,
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    }
+  }
+]

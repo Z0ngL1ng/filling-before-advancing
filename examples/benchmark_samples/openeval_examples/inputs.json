@@ -1,0 +1,64 @@
+[
+  {
+    "id": "openeval_0016",
+    "image": "images/openeval_01_sar.png",
+    "modality": "SAR",
+    "case_type": "Relation reasoning",
+    "prompt": "Describe key object and zone relations in the image, such as ship-dock, storage-water, dock-water, and terminal-access relations. State uncertainty when relations are unclear. This is SAR imagery; avoid unsupported color/material claims and report only evidence visible in SAR.",
+    "expected_uncertainties": [
+      "state Cannot determine when visual evidence is insufficient",
+      "avoid inferring exact location, identity, activity, or source without evidence"
+    ],
+    "forbidden_claims": [
+      "unsupported geographic location or named port identity",
+      "unsupported sensor/provider/acquisition-source claim",
+      "unsupported operational status such as active loading unless visibly evidenced",
+      "unsupported natural color description",
+      "fine-grained material or object identity beyond modality evidence"
+    ],
+    "judge_focus": [
+      "object relations",
+      "zone relations",
+      "spatial correctness"
+    ],
+    "publication_status": "public_showcase_example_exclude_from_held_out_scoring",
+    "image_metadata": {
+      "sha256": "0f399870fc10be3fbd03610a31caf70d372cb57cbd180c7bbcd4d4bec0336b76",
+      "dhash": "334b5473666d9229",
+      "bytes": 360113,
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    }
+  },
+  {
+    "id": "openeval_0060",
+    "image": "images/openeval_02_rgb.png",
+    "modality": "RGB",
+    "case_type": "Harbor grounded report",
+    "prompt": "Write a concise harbor remote-sensing report. Cover visible water, docks/piers, vessels, storage or terminal areas, and spatial relations. Avoid unsupported location, identity, operation, or source claims. Use only visible RGB image evidence.",
+    "expected_uncertainties": [
+      "state Cannot determine when visual evidence is insufficient",
+      "avoid inferring exact location, identity, activity, or source without evidence"
+    ],
+    "forbidden_claims": [
+      "unsupported geographic location or named port identity",
+      "unsupported sensor/provider/acquisition-source claim",
+      "unsupported operational status such as active loading unless visibly evidenced"
+    ],
+    "judge_focus": [
+      "visual grounding",
+      "object coverage",
+      "hallucination control"
+    ],
+    "publication_status": "public_showcase_example_exclude_from_held_out_scoring",
+    "image_metadata": {
+      "sha256": "79590e6ee818f09646ef5520a0833529588bd013fc10c1718859a6fa18ff2afe",
+      "dhash": "1d94130603300c0c",
+      "bytes": 420133,
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    }
+  }
+]

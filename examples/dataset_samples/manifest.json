@@ -1,0 +1,10 @@
+{
+  "name": "LLaVA three-stage training showcase",
+  "sample_only": true,
+  "stages": {
+    "stage1_alignment": 3,
+    "stage2_modality_adaptation": 4,
+    "stage3_harbor_reasoning": 5
+  },
+  "selection": "Quality-ranked, task/modality-stratified, SHA-256 deduplicated across both showcase folders."
+}

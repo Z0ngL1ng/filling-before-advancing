@@ -1,0 +1,62 @@
+[
+  {
+    "id": "llava_s1_042915",
+    "image": "images/s1_01_rssrdata.png",
+    "modality": "RGB",
+    "caption": "A coastal harbor with a long pier extending into deep blue water, bordered by a marina with moored boats, adjacent parking lots, and a large building with a red roof, all connected by roads and surrounded by green spaces and a curved road with vehicles.",
+    "source_dataset": "rssrdata",
+    "showcase_tags": [
+      "alignment",
+      "caption",
+      "spatial_grounding"
+    ],
+    "image_metadata": {
+      "sha256": "780e135fb983202f1b653c44ecb7c9511a19269f1b01115ba7796b8c3183c0c3",
+      "dhash": "190b12260e0e0c08",
+      "bytes": 1977554,
+      "width": 1374,
+      "height": 1084,
+      "format": "PNG"
+    }
+  },
+  {
+    "id": "llava_s1_121470",
+    "image": "images/s1_02_rsicd.png",
+    "modality": "RGB",
+    "caption": "Many trees and a road are in two sides of a green river with a bridge over it and near a building.",
+    "source_dataset": "rsicd",
+    "showcase_tags": [
+      "alignment",
+      "caption",
+      "spatial_grounding"
+    ],
+    "image_metadata": {
+      "sha256": "b37b94e66b7bfd5a639d2aa9e44f2caa9cca86ff354fd302453350d127399ef9",
+      "dhash": "910f8fe2a4b33652",
+      "bytes": 98093,
+      "width": 224,
+      "height": 224,
+      "format": "PNG"
+    }
+  },
+  {
+    "id": "llava_s1_473063",
+    "image": "images/s1_03_chatearthnet_4v.png",
+    "modality": "RGB",
+    "caption": "In this image, the most striking feature is the overwhelming presence of trees that make up the vast majority of the landscape. The developed areas here take on snaking patterns throughout the image. Sparse grass areas add a minor variation to the forest landscape, while a small, isolated water body is noticeable in the bottom right. This image illustrates a predominantly natural environment with minimal human intrusion.",
+    "source_dataset": "chatearthnet_4v",
+    "showcase_tags": [
+      "alignment",
+      "caption",
+      "spatial_grounding"
+    ],
+    "image_metadata": {
+      "sha256": "151f7fb37c45c0eef3514b655b0164f2c573763caadf88046b5bd198a6de8c7a",
+      "dhash": "cf4fd4869bd1ec97",
+      "bytes": 84209,
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    }
+  }
+]

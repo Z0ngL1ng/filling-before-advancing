@@ -1,0 +1,159 @@
+[
+  {
+    "id": "llava_s3_short_llava_s3_core_stage3v2_final_024951_short_replay",
+    "image": "images/s3_01_presence_or_evidence_rgb.png",
+    "modality": "RGB",
+    "transform": "explicit_short_answer_calibration_replay",
+    "task_bucket": "presence_or_evidence",
+    "conversations": [
+      {
+        "role": "user",
+        "content": "Is a water body visible in this image? <image> Answer with only Yes, No, or Cannot determine."
+      },
+      {
+        "role": "assistant",
+        "content": "Yes."
+      }
+    ],
+    "showcase_tags": [
+      "harbor_reasoning",
+      "explicit_output_contract",
+      "presence_or_evidence"
+    ],
+    "image_metadata": {
+      "sha256": "c40fff8535b4d8b9c9aa5123fe68bc7ceea45519e5ab2fa8d376f4e893793605",
+      "dhash": "60727c2651000100",
+      "bytes": 620107,
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    }
+  },
+  {
+    "id": "llava_s3_short_llava_s3_core_stage3v2_final_018827_short_replay",
+    "image": "images/s3_02_grid_nir.png",
+    "modality": "NIR",
+    "transform": "explicit_short_answer_calibration_replay",
+    "task_bucket": "grid",
+    "conversations": [
+      {
+        "role": "user",
+        "content": "The image is divided into a 3x3 grid: top-left, top-center, top-right, middle-left, middle-center, middle-right, bottom-left, bottom-center, bottom-right. Which grid cell contains the most visually clear water body? Answer with exactly one grid cell name. <image> Return only the requested grid letter or grid cell name."
+      },
+      {
+        "role": "assistant",
+        "content": "top-left."
+      }
+    ],
+    "showcase_tags": [
+      "harbor_reasoning",
+      "explicit_output_contract",
+      "grid"
+    ],
+    "image_metadata": {
+      "sha256": "233d23dbf2b302288426547e41641f5a2318d5c46ec21b2f3740d125ee40f879",
+      "dhash": "6c2a37373a8ba13c",
+      "bytes": 65882,
+      "width": 256,
+      "height": 256,
+      "format": "PNG"
+    }
+  },
+  {
+    "id": "llava_s3_short_llava_s3_core_stage3v2_final_047854_short_replay",
+    "image": "images/s3_03_relation_rgb.png",
+    "modality": "RGB",
+    "transform": "explicit_short_answer_calibration_replay",
+    "task_bucket": "relation",
+    "conversations": [
+      {
+        "role": "user",
+        "content": "What is the visible spatial relationship between the small boat and the large vessel? <image> Answer in one concise sentence without a separate evidence explanation."
+      },
+      {
+        "role": "assistant",
+        "content": "The small boat is adjacent to the large vessel."
+      }
+    ],
+    "showcase_tags": [
+      "harbor_reasoning",
+      "explicit_output_contract",
+      "relation"
+    ],
+    "image_metadata": {
+      "sha256": "07104d775967e1f29e430a654a8fa0d225a492e712eeeb18a1fb202de81481cb",
+      "dhash": "e1b5715a2c3cbddd",
+      "bytes": 347751,
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    }
+  },
+  {
+    "id": "llava_s3_short_llava_s3_core_stage3v2_final_026864_short_replay",
+    "image": "images/s3_04_rejection_rgb.png",
+    "modality": "RGB",
+    "transform": "explicit_short_answer_calibration_replay",
+    "task_bucket": "rejection",
+    "conversations": [
+      {
+        "role": "user",
+        "content": "Does this image show a functional harbor zone, or should it be described as a non-harbor remote-sensing scene? <image> Answer in one concise sentence without a separate evidence explanation."
+      },
+      {
+        "role": "assistant",
+        "content": "This image should be described as a non-harbor remote-sensing scene."
+      }
+    ],
+    "showcase_tags": [
+      "harbor_reasoning",
+      "explicit_output_contract",
+      "rejection"
+    ],
+    "image_metadata": {
+      "sha256": "f3adfe65ed2eb1f4b760a3c2d8be0affdb46a4247192af638f316f403be35356",
+      "dhash": "cecfc098db5e2d9d",
+      "bytes": 608338,
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    }
+  },
+  {
+    "id": "llava_s3_core_stage3v2_final_032823",
+    "image": "images/s3_05_multiturn_sar.png",
+    "modality": "SAR",
+    "transform": "balanced_harbor_core",
+    "conversations": [
+      {
+        "role": "user",
+        "content": "What is the visible spatial relationship between the pier and the water body? <image>"
+      },
+      {
+        "role": "assistant",
+        "content": "The pier extends into the water body. Evidence: The linear, bright pier structures are seen extending from the brighter land area into the dark water body."
+      },
+      {
+        "role": "user",
+        "content": "What is visible in this remote-sensing image?"
+      },
+      {
+        "role": "assistant",
+        "content": "This is a SAR image of a coastal harbor with multiple large vessels moored alongside linear piers. The water appears dark with low radar return, while the land areas and structures show high reflectivity. The layout suggests a berthing area with adjacent industrial port infrastructure. No small boats or bridges are visible, and specific cargo or vessel identities cannot be confirmed due to SAR resolution limits."
+      }
+    ],
+    "showcase_tags": [
+      "harbor_reasoning",
+      "multi_turn",
+      "open_response"
+    ],
+    "image_metadata": {
+      "sha256": "8ecc778ec6600246a8382f18677929fee6b434bd90e8e782b06745a316eb6805",
+      "dhash": "2c26233535929242",
+      "bytes": 420001,
+      "width": 512,
+      "height": 512,
+      "format": "PNG"
+    }
+  }
+]

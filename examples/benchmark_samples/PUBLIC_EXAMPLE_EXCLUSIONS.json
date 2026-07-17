@@ -1,0 +1,12 @@
+{
+  "purpose": "IDs published as GitHub examples must not be counted as held-out private evaluation items.",
+  "HarborEval-0617": [
+    "harboreval_mini_000444",
+    "harboreval_v12_t6_000076"
+  ],
+  "OpenEval": [
+    "openeval_0016",
+    "openeval_0060"
+  ],
+  "RSVQA-Harbor": []
+}
