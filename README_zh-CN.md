@@ -54,9 +54,27 @@ CPRS 与 HarborEval 是两套相互分离、可审计的资源，并非对原始
 
 正文中的 CPRS 总览图将数据集设计的四个部分联系起来：从 **RS-Anchor** 到 **Bridging-Conv** 和 **Scenario-EG** 的阶段演进、港口监督占比的逐步提高、广泛的沿海地理覆盖，以及图像级筛选后进行的分阶段多教师 SFT 合成与人工检查。
 
-<p align="center">
-  <a href="assets/resource_workflows.svg"><img src="assets/resource_workflows.svg" alt="CPRS 与 HarborEval 的审计式制备工作流" width="100%"></a>
-</p>
+**CPRS 训练监督流程**
+
+```mermaid
+flowchart LR
+    C1["来源收集"] --> C2["模态归一化"]
+    C2 --> C3["证据提取与 SMT 指令合成"]
+    C3 --> C4["验证、修复与去重"]
+    C4 --> C5["仅训练导出"]
+```
+
+**HarborEval 诊断基准流程**
+
+```mermaid
+flowchart LR
+    H1["样本选择"] --> H2["来源记录级留出"]
+    H2 --> H3["八轨道构建"]
+    H3 --> H4["评测基准审计"]
+    H4 --> H5["冻结评测"]
+```
+
+> **隔离规则：** HarborEval 的来源记录不会进入任何训练导出；私有答案与评分字段仅在模型推理完成后合并。
 
 ### CPRS 制备概览
 

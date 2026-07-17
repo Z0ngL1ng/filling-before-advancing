@@ -54,9 +54,27 @@ CPRS and HarborEval are maintained as separate, audited resources rather than as
 
 The CPRS overview from the paper connects four parts of the dataset design: the stage-wise shift from **RS-Anchor** to **Bridging-Conv** and **Scenario-EG**, the increasing concentration of harbor supervision, broad coastal geographic coverage, and image-level curation followed by staged multi-teacher SFT synthesis and manual inspection.
 
-<p align="center">
-  <a href="assets/resource_workflows.svg"><img src="assets/resource_workflows.svg" alt="Audited CPRS and HarborEval construction workflows" width="100%"></a>
-</p>
+**CPRS training-supervision flow**
+
+```mermaid
+flowchart LR
+    C1["Source collection"] --> C2["Modality normalization"]
+    C2 --> C3["Evidence grounding and SMT synthesis"]
+    C3 --> C4["Verification, repair, and deduplication"]
+    C4 --> C5["Train-only export"]
+```
+
+**HarborEval diagnostic-benchmark flow**
+
+```mermaid
+flowchart LR
+    H1["Record selection"] --> H2["Source-record holdout"]
+    H2 --> H3["Eight-track construction"]
+    H3 --> H4["Benchmark audit"]
+    H4 --> H5["Frozen evaluation"]
+```
+
+> **Separation rule:** HarborEval source records never enter a training export; private answers and scoring fields are joined only after inference.
 
 ### CPRS curation at a glance
 
