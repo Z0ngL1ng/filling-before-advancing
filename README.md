@@ -49,6 +49,12 @@ FBA organizes supervision by capability dependency rather than mixing all availa
 CPRS and HarborEval are maintained as separate, audited resources rather than assembled through raw dataset or benchmark merging. CPRS applies a common pipeline of modality normalization, evidence grounding, instruction synthesis, verifier-based repair, image deduplication, and leakage removal. HarborEval uses source-record holdout and a public/private field split so that answer-bearing evidence never enters training records or model prompts.
 
 <p align="center">
+  <a href="assets/cprs_progressive_data_curation.png"><img src="assets/cprs_progressive_data_curation.png" alt="Progressive data curation of the three-layer CPRS dataset" width="100%"></a>
+</p>
+
+The CPRS overview from the paper connects four parts of the dataset design: the stage-wise shift from **RS-Anchor** to **Bridging-Conv** and **Scenario-EG**, the increasing concentration of harbor supervision, broad coastal geographic coverage, and image-level curation followed by staged multi-teacher SFT synthesis and manual inspection.
+
+<p align="center">
   <a href="assets/resource_workflows.svg"><img src="assets/resource_workflows.svg" alt="Audited CPRS and HarborEval construction workflows" width="100%"></a>
 </p>
 
@@ -74,6 +80,13 @@ Audit information such as source metadata, teacher notes, verifier rationales, c
 | **T8 (181)** | Non-harbor and near-domain rejection |
 
 HarborEval contains **1,245 items over 471 unique images**, including **1,154 structured items** and **91 open-ended description or rejection items**. During inference, a model receives only the image, question, and answer choices when applicable. Answers, evidence annotations, accepted labels or grid cells, references, forbidden claims, and scoring rubrics remain private and are merged only after inference. Once a source record is assigned to HarborEval, its derived conversations are excluded from every training export.
+
+### Public sample showcases
+
+- [`examples/dataset_samples`](examples/dataset_samples) contains 12 inspection samples spanning the three CPRS supervision layers and RGB, SAR, PAN, and NIR imagery.
+- [`examples/benchmark_samples`](examples/benchmark_samples) contains six input-only examples from HarborEval, OpenEval, and RSVQA-Harbor. Private reference answers are omitted, and published held-out examples are recorded for exclusion from future score reporting.
+
+These compact showcases illustrate record structure and visual-task coverage; they are not substitutes for the full resource release.
 
 ## Evidence-grounded examples
 

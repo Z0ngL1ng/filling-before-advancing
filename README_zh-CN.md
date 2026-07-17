@@ -49,6 +49,12 @@ FBA 按能力依赖关系组织训练监督，而不是在一个阶段内混合�
 CPRS 与 HarborEval 是两套相互分离、可审计的资源，并非对原始数据集或评测基准的直接拼接。CPRS 统一执行模态归一化、可见证据提取、指令合成、验证器修复、图像去重和泄漏清理；HarborEval 则实施来源记录级留出以及公开/私有字段隔离，确保带答案的证据既不会进入训练数据，也不会出现在模型提示中。
 
 <p align="center">
+  <a href="assets/cprs_progressive_data_curation.png"><img src="assets/cprs_progressive_data_curation.png" alt="三层 CPRS 数据集的渐进式数据制备" width="100%"></a>
+</p>
+
+正文中的 CPRS 总览图将数据集设计的四个部分联系起来：从 **RS-Anchor** 到 **Bridging-Conv** 和 **Scenario-EG** 的阶段演进、港口监督占比的逐步提高、广泛的沿海地理覆盖，以及图像级筛选后进行的分阶段多教师 SFT 合成与人工检查。
+
+<p align="center">
   <a href="assets/resource_workflows.svg"><img src="assets/resource_workflows.svg" alt="CPRS 与 HarborEval 的审计式制备工作流" width="100%"></a>
 </p>
 
@@ -74,6 +80,13 @@ CPRS 与 HarborEval 是两套相互分离、可审计的资源，并非对原始
 | **T8（181）** | 非港口及近域场景拒答 |
 
 HarborEval 包含 **1,245 个评测项和 471 幅唯一图像**，其中 **1,154 项为结构化问题**，**91 项为开放式描述或拒答问题**。推理时，模型只接收图像、问题以及适用时的候选答案；答案、证据标注、可接受标签或网格、参考回答、禁止声明和评分规则全部保留在私有包中，仅在推理结束后合并评分。一旦某条来源记录被划入 HarborEval，其派生对话就会从所有训练导出中排除。
+
+### 公开样张
+
+- [`examples/dataset_samples`](examples/dataset_samples) 提供 12 个检查样例，覆盖 CPRS 的三个监督层以及 RGB、SAR、PAN 和 NIR 图像。
+- [`examples/benchmark_samples`](examples/benchmark_samples) 提供来自 HarborEval、OpenEval 和 RSVQA-Harbor 的 6 个仅输入样例。私有参考答案未被公开，已展示的留出样例也会被记录并从后续分数报告中排除。
+
+这些轻量展示包用于说明记录结构和视觉任务覆盖，不代替后续发布的完整资源。
 
 ## 证据约束样例
 
