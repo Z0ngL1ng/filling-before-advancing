@@ -1,11 +1,13 @@
-<!-- INTERNAL DRAFT: keep private until the current AAAI-27 anonymity rules are confirmed. -->
-
 <div align="center">
 
 # Filling Before Advancing
 
 ### Capability-Gap-Driven Post-Training for Scenario-Specialized Remote Sensing MLLMs
 
+<p align="center">
+  <a href="https://arxiv.org/search/cs?searchtype=author&query=Zong,+Y">Yuheng Zong</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Wang,+M">Minghua Wang</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Zhao,+X">Xin Zhao</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Zhan,+Z">Zhi-Hui Zhan</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Plaza,+A">Antonio Plaza</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Benediktsson,+J+A">Jon Atli Benediktsson</a>
+</p>
+[![arXiv](https://img.shields.io/badge/arXiv-2607.22205-b31b1b.svg?logo=arxiv)](https://arxiv.org/abs/2607.22205)
 [English](README.md) | [简体中文](README_zh-CN.md)
 
 </div>
@@ -16,24 +18,24 @@
 
 ## Overview
 
-Remote sensing multimodal large language models (RS-MLLMs) can understand general aerial imagery, but practical Earth-observation applications often require fine-grained scenario specialization. Limited target data must bridge overhead-view semantics, heterogeneous sensor observations, transferable domain knowledge, and task-specific behavior at the same time. Direct supervised fine-tuning can therefore leave prerequisite capability gaps unresolved.
+Remote sensing multimodal large language models (RS-MLLMs) can understand general aerial imagery, but practical Earth-observation applications often require fine-grained scenario specialization. Limited target data must simultaneously bridge overhead-view semantics, heterogeneous sensor observations, transferable domain knowledge, and task-specific behavior. Direct supervised fine-tuning can therefore leave prerequisite capability gaps unresolved.
 
-**Filling Before Advancing (FBA)** formulates this adaptation as a capability-ordered post-training problem. It first builds the capabilities that specialization depends on, and then tunes the final evidence-grounded scenario behavior.
+**Filling Before Advancing (FBA)** formulates adaptation as a capability-ordered post-training problem: it first builds the capabilities that scenario specialization depends on, then tunes evidence-grounded target behavior.
 
 We instantiate FBA for multi-source coastal harbor understanding and introduce:
 
 - **CPRS**, approximately 810K supervision records organized into three capability-aligned layers;
 - **HarborEval**, 1,245 diagnostic items over 471 images across RGB, SAR, PAN, and NIR; and
-- controlled evaluations on **LLaVA-v1.5** and **Qwen3-VL**.
+- controlled evaluations with **LLaVA-v1.5** and **Qwen3-VL**.
 
 ## Method
 
-FBA organizes supervision by capability dependency rather than mixing all available samples in a single stage.
+FBA organizes supervision by capability dependency rather than mixing all available samples in one stage.
 
 | Stage | Supervision | Role | Scale |
 |---|---|---|---:|
 | **S1** | **RS-Anchor** | Overhead-view visual-language alignment and broad RS semantics | 569,853 image-caption pairs |
-| **S2** | **Bridge-Conv** | Shared RS priors across target/bridging scenes and multiple sensors | 187,296 SFT records |
+| **S2** | **Bridge-Conv** | Shared RS priors across target and bridging scenes and multiple sensors | 187,296 SFT records |
 | **S3** | **Scenario-EG** | Evidence-grounded perception, spatial reasoning, robustness, and generation | 53,000 SFT records |
 
 <p align="center">
@@ -52,14 +54,14 @@ CPRS and HarborEval are maintained as separate, audited resources; raw training 
   <a href="assets/cprs_progressive_data_curation.png"><img src="assets/cprs_progressive_data_curation.png" alt="Progressive data curation of the three-layer CPRS dataset" width="100%"></a>
 </p>
 
-The CPRS overview from the paper connects four parts of the dataset design: the stage-wise shift from **RS-Anchor** to **Bridging-Conv** and **Scenario-EG**, the increasing concentration of harbor supervision, broad coastal geographic coverage, and image-level curation followed by staged multi-teacher SFT synthesis and manual inspection.
+The CPRS design combines a stage-wise transition from **RS-Anchor** to **Bridge-Conv** and **Scenario-EG**, increasingly harbor-focused supervision, broad coastal coverage, and image-level curation followed by staged multi-teacher SFT synthesis and manual inspection.
 
-**CPRS construction and audit.** The three supervision layers share one evidence-centered curation policy. Heterogeneous sources are normalized into image-text or ShareGPT-style records; image-text data retain one caption per unique image, while instruction conversations are restricted to visible evidence. For SAR, NIR, and PAN, wording is further constrained by what each sensor can support. Staged multi-teacher distillation assigns fixed roles to metadata grounding, instruction synthesis, and evidence verification, after which candidates are retained, rewritten, or discarded. Source metadata, teacher notes, verifier rationales, construction tags, and retry outcomes are preserved for audit but removed from student-model exports, together with malformed records, duplicate references, benchmark traces, and modality-incompatible claims.
+**CPRS construction and audit.** Heterogeneous sources are normalized into image-text or ShareGPT-style records. Image-text data retain one caption per unique image, while instruction conversations are restricted to visible evidence. For SAR, NIR, and PAN, wording is further constrained by sensor observability. Staged multi-teacher distillation assigns fixed roles to metadata grounding, instruction synthesis, and evidence verification; candidates are retained, rewritten, or discarded. Source metadata, teacher notes, verifier rationales, construction tags, and retry outcomes are retained for audit but removed from student-model exports, together with malformed records, duplicate references, benchmark traces, and modality-incompatible claims.
 
 ### CPRS curation at a glance
 
 - **RS-Anchor:** 3,135,250 source samples → 569,853 unique image-caption pairs from eight public datasets, after caption cleaning, image-level deduplication, scene classification, diversity-aware sampling, and visible-semantic filtering.
-- **Bridging-Conv:** 187,296 SFT records—99,088 RGB, 29,984 SAR, 28,475 NIR, and 29,749 PAN. Its RGB pool includes 59,453 water/coast/port/dock/ship-related records. Construction applies modality-aware rewriting plus staged evidence grounding, instruction synthesis, and verify/rewrite/drop decisions.
+- **Bridge-Conv:** 187,296 SFT records: 99,088 RGB, 29,984 SAR, 28,475 NIR, and 29,749 PAN. Its RGB pool includes 59,453 water/coast/port/dock/ship-related records. Construction applies modality-aware rewriting plus staged evidence grounding, instruction synthesis, and verify/rewrite/drop decisions.
 - **Scenario-EG:** 53,000 train-only SFT records over 8,703 RGB, SAR, PAN, and NIR images, covering presence validation, relation reasoning, grid grounding, functional-zone interpretation, controlled negatives, response replay, and benchmark-trace removal.
 
 Resources that cannot be redistributed will be represented by source manifests and reconstruction scripts where their licenses permit.
@@ -90,7 +92,7 @@ These compact showcases illustrate record structure and visual-task coverage; th
 
 ## Evidence-grounded examples
 
-The four examples below illustrate the response forms targeted by Scenario-EG and diagnosed by HarborEval: functional captioning in RGB, geometry-based grid grounding in PAN, evidence-based VQA in SAR, and spatial-relation reasoning in NIR. The goal is not identical wording across sensors, but claims that remain compatible with what each modality can actually reveal.
+The four examples below illustrate the response forms targeted by Scenario-EG and diagnosed by HarborEval: functional captioning in RGB, geometry-based grid grounding in PAN, evidence-based VQA in SAR, and spatial-relation reasoning in NIR. The goal is not identical wording across sensors, but claims that remain compatible with what each modality can reveal.
 
 <p align="center">
   <a href="assets/evidence_grounded_examples.png"><img src="assets/evidence_grounded_examples.png" alt="Four evidence-grounded harbor examples across RGB, PAN, SAR, and NIR" width="100%"></a>
@@ -109,15 +111,16 @@ Vessel or water keywords alone do not justify a harbor label. Positive records m
 
 ## Results
 
-### 1. Controlled route comparison and HarborEval diagnosis
+### 1. Controlled route comparison on HarborEval
 
-| Training route | LLaVA-v1.5 | Qwen3-VL |
+| Model state / training route | LLaVA-v1.5 | Qwen3-VL |
 |---|---:|---:|
+| Official / base checkpoint | 46.22 | 70.37 |
 | Direct-SFT | 57.95 | 81.09 |
 | Strongest Collapsed-SFT | 55.74 | 79.36 |
 | **FBA** | **70.29** | **83.37** |
 
-FBA achieves the highest HarborEval score in both controlled backbone families. The LLaVA-v1.5 route improves from **57.95 to 70.29** over Direct-SFT. The same pattern holds on Qwen3-VL, where FBA also exceeds Direct-SFT and the strongest collapsed baseline.
+Relative to the corresponding official or base checkpoint, FBA raises the HarborEval score from **46.22 to 70.29** on LLaVA-v1.5 and from **70.37 to 83.37** on Qwen3-VL. Under controlled post-training comparisons, FBA also outperforms Direct-SFT and the strongest Collapsed-SFT in both backbone families.
 
 <details>
 <summary><strong>Direct-SFT → FBA track-level breakdown</strong></summary>
@@ -170,12 +173,12 @@ The trajectory is role-specific rather than uniformly monotonic: S1 establishes 
 | Role | Replacement → intended supervision | RS-VL | MS | HE |
 |---|---|---:|---:|---:|
 | **D1 anchoring** | Generic image-text → RS-Anchor | 76.42 → **89.16** | 64.49 → **68.04** | 60.36 → **70.29** |
-| **D2 bridging** | Non-bridging → Bridging-Conv | 84.36 → **89.16** | 66.90 → **68.04** | 57.11 → **70.29** |
+| **D2 bridging** | Non-bridging → Bridge-Conv | 84.36 → **89.16** | 66.90 → **68.04** | 57.11 → **70.29** |
 | **D3 specialization** | Non-EG → Scenario-EG | 88.97 → **89.16** | 67.78 → **68.04** | 50.12 → **70.29** |
 
-Replacing each intended supervision layer weakens the capability it is designed to supply. RS-Anchor contributes most clearly to RS-VL anchoring, Bridge-Conv improves multi-source and downstream adaptation, and Scenario-EG produces the largest HarborEval recovery. This compact control view focuses on the intermediate diagnostics and HarborEval that directly test the three capability roles.
+Replacing each intended supervision layer weakens the capability it is designed to supply. RS-Anchor contributes most clearly to RS-VL anchoring, Bridge-Conv improves multi-source and downstream adaptation, and Scenario-EG produces the largest HarborEval recovery.
 
-All scores use a 0-100 scale. Evaluation inputs, semantic prompts, decoding policies, answer normalization, and scoring rules are held consistent within each controlled comparison.
+All scores use a 0–100 scale. Evaluation inputs, semantic prompts, decoding policies, answer normalization, and scoring rules are held consistent within each controlled comparison.
 
 ## Bridge-domain analysis
 
@@ -189,7 +192,7 @@ Bridge-Conv is selected around target-related visual-language priors rather than
 
 | Artifact | Status |
 |---|---|
-| Paper | Anonymous submission package prepared |
+| Paper | [arXiv:2607.22205](https://arxiv.org/abs/2607.22205) |
 | Code | Training and evaluation release in preparation |
 | Weights | Release preparation in progress |
 | CPRS | Release scope and source licenses under review |
@@ -197,26 +200,17 @@ Bridge-Conv is selected around target-related visual-language priors rather than
 
 **Datasets, benchmarks, and trained weights will be publicly released after notification.**
 
-No artifact is presented as downloadable until it has passed anonymity, licensing, and reproducibility review.
-
-<details>
-<summary><strong>Planned repository structure</strong></summary>
-
-```text
-.
-|-- assets/                 # Project figures
-|-- configs/                # Frozen training/evaluation configurations
-|-- data/                   # CPRS manifests and preparation documentation
-|-- eval/                   # HarborEval inference and scoring tools
-|-- models/                 # Model cards and weight-release notes
-|-- scripts/                # Training, inference, and evaluation entry points
-`-- docs/                   # Release and communication material
-```
-
-</details>
-
 ## Citation and license
 
-Final citation metadata will be added after the paper record and author list are public. A template is provided in [`CITATION.cff.template`](CITATION.cff.template).
+If you find this work useful, please cite:
 
-The public repository will document the licenses and usage conditions of original code, third-party models, source datasets, figures, evaluation records, and released weights. Resources that cannot be redistributed will be represented through manifests and reproducible preparation scripts where permitted.
+```bibtex
+@article{zong2026fba,
+  title   = {Filling Before Advancing: Capability-Gap-Driven Post-Training for Scenario-Specialized Remote Sensing MLLMs},
+  author  = {Zong, Yuheng and Wang, Minghua and Zhao, Xin and Zhan, Zhi-Hui and Plaza, Antonio and Benediktsson, Jon Atli},
+  journal = {arXiv preprint arXiv:2607.22205},
+  year    = {2026}
+}
+```
+
+The repository will document the licenses and usage conditions of original code, third-party models, source datasets, figures, evaluation records, and released weights. Resources that cannot be redistributed will be represented through manifests and reproducible preparation scripts where permitted.

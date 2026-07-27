@@ -1,11 +1,13 @@
-<!-- 内部草稿：确认 AAAI-27 匿名规则前请保持私有。 -->
-
 <div align="center">
 
 # Filling Before Advancing
 
 ### 面向场景专用遥感多模态大语言模型的能力缺口驱动后训练
 
+<p align="center">
+  <a href="https://arxiv.org/search/cs?searchtype=author&query=Zong,+Y">Yuheng Zong</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Wang,+M">Minghua Wang</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Zhao,+X">Xin Zhao</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Zhan,+Z">Zhi-Hui Zhan</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Plaza,+A">Antonio Plaza</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Benediktsson,+J+A">Jon Atli Benediktsson</a>
+</p>
+[![arXiv](https://img.shields.io/badge/arXiv-2607.22205-b31b1b.svg?logo=arxiv)](https://arxiv.org/abs/2607.22205)
 [English](README.md) | [简体中文](README_zh-CN.md)
 
 </div>
@@ -109,15 +111,16 @@ HarborEval 包含 **1,245 个评测项和 471 幅唯一图像**，其中 **1,154
 
 ## 实验结果
 
-### 1. HarborEval 受控路线与细粒度诊断
+### 1. HarborEval 受控路线对比
 
-| 训练路线 | LLaVA-v1.5 | Qwen3-VL |
+| 模型状态 / 训练路线 | LLaVA-v1.5 | Qwen3-VL |
 |---|---:|---:|
+| 官方 / 基座检查点 | 46.22 | 70.37 |
 | Direct-SFT | 57.95 | 81.09 |
 | 最强 Collapsed-SFT | 55.74 | 79.36 |
 | **FBA** | **70.29** | **83.37** |
 
-FBA 在两个受控骨干系列上均取得最高 HarborEval 分数。LLaVA-v1.5 相比 Direct-SFT 由 **57.95 提升到 70.29**。在 Qwen3-VL 上也呈现相同结果：FBA 同时优于 Direct-SFT 和最强的折叠训练基线。
+相较于对应的官方模型或基座检查点，FBA 在 LLaVA-v1.5 上将 HarborEval 分数从 **46.22 提升至 70.29**，在 Qwen3-VL 上从 **70.37 提升至 83.37**。在受控后训练比较中，FBA 在两个骨干系列上也均优于 Direct-SFT 和最强的 Collapsed-SFT。
 
 <details>
 <summary><strong>Direct-SFT → FBA 细粒度轨道结果</strong></summary>
@@ -197,26 +200,16 @@ Bridge-Conv 围绕与目标场景相关的视觉—语言先验进行选择，�
 
 **数据集、评测基准和训练权重将在结果通知后公开发布。**
 
-在通过匿名、许可证和可复现性审核之前，本仓库不会将任何内容描述为可下载资源。
-
-<details>
-<summary><strong>规划中的仓库结构</strong></summary>
-
-```text
-.
-|-- assets/                 # 项目图像
-|-- configs/                # 固定的训练与评测配置
-|-- data/                   # CPRS 清单与数据准备说明
-|-- eval/                   # HarborEval 推理与评分工具
-|-- models/                 # 模型卡与权重发布说明
-|-- scripts/                # 训练、推理与评测入口
-`-- docs/                   # 发布与宣传材料
-```
-
-</details>
-
 ## 引用与许可证
 
-论文记录和作者列表公开后，将补充最终引用信息。仓库提供了 [`CITATION.cff.template`](CITATION.cff.template) 模板。
+如本工作对你的研究有帮助，欢迎引用：
 
-公开仓库将分别说明原创代码、第三方模型、来源数据集、论文图像、评测记录和模型权重的许可证与使用条件。无法直接再分发的资源将在许可范围内通过来源清单和可复现脚本提供。
+```bibtex
+@article{zong2026fba,
+  title   = {Filling Before Advancing: Capability-Gap-Driven Post-Training for Scenario-Specialized Remote Sensing MLLMs},
+  author  = {Zong, Yuheng and Wang, Minghua and Zhao, Xin and Zhan, Zhi-Hui and Plaza, Antonio and Benediktsson, Jon Atli},
+  journal = {arXiv preprint arXiv:2607.22205},
+  year    = {2026}
+}
+```
+仓库将分别说明原创代码、第三方模型、来源数据集、论文图像、评测记录和模型权重的许可证与使用条件。无法直接再分发的资源将在许可范围内通过来源清单和可复现脚本提供。
