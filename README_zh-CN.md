@@ -7,8 +7,12 @@
 <p align="center">
   <a href="https://arxiv.org/search/cs?searchtype=author&query=Zong,+Y">Yuheng Zong</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Wang,+M">Minghua Wang</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Zhao,+X">Xin Zhao</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Zhan,+Z">Zhi-Hui Zhan</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Plaza,+A">Antonio Plaza</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Benediktsson,+J+A">Jon Atli Benediktsson</a>
 </p>
-[![arXiv](https://img.shields.io/badge/arXiv-2607.22205-b31b1b.svg?logo=arxiv)](https://arxiv.org/abs/2607.22205)
-[English](README.md) | [简体中文](README_zh-CN.md)
+
+<p align="center">
+  <a href="https://arxiv.org/abs/2607.22205"><img src="https://img.shields.io/badge/arXiv-2607.22205-b31b1b.svg?logo=arxiv" alt="arXiv"></a>
+  &nbsp;|&nbsp;
+  <a href="README.md">English</a> | <a href="README_zh-CN.md">简体中文</a>
+</p>
 
 </div>
 
