@@ -32,6 +32,12 @@ We instantiate FBA for multi-source coastal harbor understanding and introduce:
 - **HarborEval**, 1,245 diagnostic items over 471 images across RGB, SAR, PAN, and NIR; and
 - controlled evaluations with **LLaVA-v1.5** and **Qwen3-VL**.
 
+## Why “Filling Before Advancing”?
+
+The name **Filling Before Advancing** draws inspiration from two ideas in *Mencius*: advancing only after each hollow has been filled, and learning broadly before returning to a concise understanding. The former mirrors the central premise of FBA: prerequisite gaps in remote-sensing visual-language alignment, multi-source modality understanding, and bridge-domain priors should be filled before reliable target-scenario specialization can proceed.
+
+The latter reflects FBA's progression from breadth to focus. The model first establishes broad remote-sensing semantics, then learns shared priors from target and bridging scenarios, and finally converges toward evidence-grounded harbor behavior. FBA is therefore not merely an easy-to-hard curriculum, but a capability-gap-driven post-training route that advances from a broad foundation toward reliable and concentrated scenario specialization.
+
 ## Method
 
 FBA organizes supervision by capability dependency rather than mixing all available samples in one stage.
