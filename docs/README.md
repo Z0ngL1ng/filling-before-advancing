@@ -20,7 +20,7 @@ Switching language updates the `lang` URL parameter while preserving the current
 
 Research claims, author order, scores, citation, and release status follow the repository README. Update the website when those facts change. The interactive gallery shows eight curated CPRS source-data cases from `examples/dataset_samples/cprs_source_showcase`, with two cases per sensor. The 8,300-record source snapshot is explicitly distinguished from the approximately 810K stage-wise supervision corpus. Existing stage-specific and benchmark showcases remain available separately.
 
-Hugging Face model and dataset entries are intentionally disabled placeholders. To activate them, replace the `#hf-models` and `#hf-datasets` spans in `index.html` with anchors pointing to the published URLs, remove `aria-disabled`, and use the resource link styling. Add the same URLs around the corresponding badges in both repository READMEs and update their release-status rows.
+Hugging Face entries link to the [FBA model project page](https://huggingface.co/zongling/FBA) and [CPRS dataset project page](https://huggingface.co/datasets/zongling/CPRS). Their pages introduce the research; weights and full data will be released progressively after paper acceptance. Keep these links and release-status wording consistent across the website and both repository READMEs.
 
 - `data/cprs-showcase.json`: grid convention, adapted English dialogue, Chinese translations, grid answer cells, and object relations for the eight cases.
 - `assets/rgb_*.png`, `assets/sar_*.png`, `assets/pan_*.png`, `assets/nir_*.png`: unchanged copies of the corresponding curated source showcase images.

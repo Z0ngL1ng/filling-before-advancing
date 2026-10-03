@@ -13,10 +13,9 @@
   &nbsp;
   <a href="https://z0ngl1ng.github.io/filling-before-advancing/"><img src="https://img.shields.io/badge/Project-Website-39766b.svg?style=flat-square" alt="Project website" height="24"></a>
   &nbsp;
-  <!-- Hugging Face placeholders: wrap each badge in an anchor when its URL is available. -->
-  <img src="https://img.shields.io/badge/HF_Models-Coming_soon-888888.svg?logo=huggingface&amp;style=flat-square" alt="Hugging Face models: coming soon" height="24">
+  <a href="https://huggingface.co/zongling/FBA"><img src="https://img.shields.io/badge/HF_Models-Preview-e9b44c.svg?logo=huggingface&amp;style=flat-square" alt="Hugging Face model project page" height="24"></a>
   &nbsp;
-  <img src="https://img.shields.io/badge/HF_Datasets-Coming_soon-888888.svg?logo=huggingface&amp;style=flat-square" alt="Hugging Face datasets: coming soon" height="24">
+  <a href="https://huggingface.co/datasets/zongling/CPRS"><img src="https://img.shields.io/badge/HF_Datasets-Preview-e9b44c.svg?logo=huggingface&amp;style=flat-square" alt="Hugging Face dataset project page" height="24"></a>
 </p>
 
 <p align="center"><strong>English</strong> · <a href="README_zh-CN.md">简体中文</a></p>
@@ -235,14 +234,14 @@ Bridge-Conv is selected around target-related visual-language priors rather than
 |---|---|
 | Paper | [arXiv:2607.22205](https://arxiv.org/abs/2607.22205) |
 | Project website | [Interactive bilingual research page](https://z0ngl1ng.github.io/filling-before-advancing/) |
-| Hugging Face models | Coming soon; URL to be added |
-| Hugging Face datasets | Coming soon; URL to be added |
+| Hugging Face models | [FBA project page](https://huggingface.co/zongling/FBA) available; weights will be released progressively after paper acceptance |
+| Hugging Face datasets | [CPRS project page](https://huggingface.co/datasets/zongling/CPRS) available; full data will be released progressively after paper acceptance |
 | Code | Training and evaluation release in preparation |
 | Weights | Release preparation in progress |
 | CPRS | Release scope and source licenses under review |
 | HarborEval | Public/private evaluation packaging in preparation |
 
-**Datasets, benchmarks, and trained weights will be publicly released after notification.**
+**Datasets, benchmarks, and trained weights will be released progressively after paper acceptance.**
 
 ## Citation and license
 
