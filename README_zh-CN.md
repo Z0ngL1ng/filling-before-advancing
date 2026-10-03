@@ -13,6 +13,10 @@
   &nbsp;|&nbsp;
   <a href="https://z0ngl1ng.github.io/filling-before-advancing/?lang=zh"><img src="https://img.shields.io/badge/Project-Website-39766b.svg" alt="项目宣传网页" style="vertical-align: middle;"></a>
   &nbsp;|&nbsp;
+  <!-- Hugging Face 占位：获得网址后，为相应徽章添加链接。 -->
+  <img src="https://img.shields.io/badge/Hugging_Face-Models_pending-888888.svg?logo=huggingface" alt="Hugging Face 模型：待上线" style="vertical-align: middle;">
+  <img src="https://img.shields.io/badge/Hugging_Face-Datasets_pending-888888.svg?logo=huggingface" alt="Hugging Face 数据集：待上线" style="vertical-align: middle;">
+  &nbsp;|&nbsp;
   <a href="README.md">English</a> | <a href="README_zh-CN.md">简体中文</a>
 </p>
 
@@ -205,7 +209,10 @@ Bridge-Conv 围绕与目标场景相关的视觉—语言先验进行选择，�
 
 | 内容 | 状态 |
 |---|---|
-| 论文 | 匿名投稿材料已准备 |
+| 论文 | [arXiv:2607.22205](https://arxiv.org/abs/2607.22205) |
+| 项目网页 | [交互式中英文宣传网页](https://z0ngl1ng.github.io/filling-before-advancing/?lang=zh) |
+| Hugging Face 模型 | 待上线，后续补充网址 |
+| Hugging Face 数据集 | 待上线，后续补充网址 |
 | 代码 | 训练与评测公开包准备中 |
 | 权重 | 公开发布准备中 |
 | CPRS | 正在审核公开范围与来源许可证 |

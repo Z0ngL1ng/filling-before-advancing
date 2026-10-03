@@ -13,6 +13,10 @@
   &nbsp;|&nbsp;
   <a href="https://z0ngl1ng.github.io/filling-before-advancing/"><img src="https://img.shields.io/badge/Project-Website-39766b.svg" alt="Project website" style="vertical-align: middle;"></a>
   &nbsp;|&nbsp;
+  <!-- Hugging Face placeholders: wrap each badge in an anchor when its URL is available. -->
+  <img src="https://img.shields.io/badge/Hugging_Face-Models_pending-888888.svg?logo=huggingface" alt="Hugging Face models: coming soon" style="vertical-align: middle;">
+  <img src="https://img.shields.io/badge/Hugging_Face-Datasets_pending-888888.svg?logo=huggingface" alt="Hugging Face datasets: coming soon" style="vertical-align: middle;">
+  &nbsp;|&nbsp;
   <a href="README.md">English</a> | <a href="README_zh-CN.md">简体中文</a>
 </p>
 
@@ -206,6 +210,9 @@ Bridge-Conv is selected around target-related visual-language priors rather than
 | Artifact | Status |
 |---|---|
 | Paper | [arXiv:2607.22205](https://arxiv.org/abs/2607.22205) |
+| Project website | [Interactive bilingual research page](https://z0ngl1ng.github.io/filling-before-advancing/) |
+| Hugging Face models | Coming soon; URL to be added |
+| Hugging Face datasets | Coming soon; URL to be added |
 | Code | Training and evaluation release in preparation |
 | Weights | Release preparation in progress |
 | CPRS | Release scope and source licenses under review |
