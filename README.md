@@ -9,16 +9,19 @@
 </p>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2607.22205"><img src="https://img.shields.io/badge/arXiv-2607.22205-b31b1b.svg?logo=arxiv" alt="arXiv" style="vertical-align: middle;"></a>
-  &nbsp;|&nbsp;
-  <a href="https://z0ngl1ng.github.io/filling-before-advancing/"><img src="https://img.shields.io/badge/Project-Website-39766b.svg" alt="Project website" style="vertical-align: middle;"></a>
-  &nbsp;|&nbsp;
+  <a href="https://arxiv.org/abs/2607.22205"><img src="https://img.shields.io/badge/arXiv-2607.22205-b31b1b.svg?logo=arxiv&amp;style=flat-square" alt="arXiv:2607.22205" height="24"></a>
+  &nbsp;
+  <a href="https://z0ngl1ng.github.io/filling-before-advancing/"><img src="https://img.shields.io/badge/Project-Website-39766b.svg?style=flat-square" alt="Project website" height="24"></a>
+  &nbsp;
   <!-- Hugging Face placeholders: wrap each badge in an anchor when its URL is available. -->
-  <img src="https://img.shields.io/badge/Hugging_Face-Models_pending-888888.svg?logo=huggingface" alt="Hugging Face models: coming soon" style="vertical-align: middle;">
-  <img src="https://img.shields.io/badge/Hugging_Face-Datasets_pending-888888.svg?logo=huggingface" alt="Hugging Face datasets: coming soon" style="vertical-align: middle;">
-  &nbsp;|&nbsp;
-  <a href="README.md">English</a> | <a href="README_zh-CN.md">简体中文</a>
+  <img src="https://img.shields.io/badge/HF_Models-Coming_soon-888888.svg?logo=huggingface&amp;style=flat-square" alt="Hugging Face models: coming soon" height="24">
+  &nbsp;
+  <img src="https://img.shields.io/badge/HF_Datasets-Coming_soon-888888.svg?logo=huggingface&amp;style=flat-square" alt="Hugging Face datasets: coming soon" height="24">
 </p>
+
+<p align="center"><strong>English</strong> · <a href="README_zh-CN.md">简体中文</a></p>
+
+<p align="center"><a href="#method">Method</a> &nbsp;·&nbsp; <a href="#resource-construction">Data & samples</a> &nbsp;·&nbsp; <a href="#results">Results</a> &nbsp;·&nbsp; <a href="#release-status">Release status</a> &nbsp;·&nbsp; <a href="#citation-and-license">Citation</a></p>
 
 </div>
 
@@ -34,9 +37,9 @@ Remote sensing multimodal large language models (RS-MLLMs) can understand genera
 
 We instantiate FBA for multi-source coastal harbor understanding and introduce:
 
-- **CPRS**, approximately 810K supervision records organized into three capability-aligned layers;
-- **HarborEval**, 1,245 diagnostic items over 471 images across RGB, SAR, PAN, and NIR; and
-- controlled evaluations with **LLaVA-v1.5** and **Qwen3-VL**.
+| CPRS supervision | HarborEval diagnostics | Backbone families |
+| :---: | :---: | :---: |
+| **~810K records**<br>Three capability-aligned layers | **1,245 items · 471 images**<br>RGB · SAR · PAN · NIR | **LLaVA-v1.5 · Qwen3-VL**<br>Controlled post-training comparisons |
 
 ## Why “Filling Before Advancing”?
 
@@ -104,6 +107,27 @@ HarborEval contains **1,245 items over 471 unique images**, including **1,154 st
 - **Preferred data showcase:** [`examples/dataset_samples/cprs_source_showcase`](examples/dataset_samples/cprs_source_showcase) provides eight clear source-data cases, two per sensor, with image-grounded grid dialogue, multi-cell localization, and object relations. The project website lets visitors switch cases and inspect the 3×3 grid answers. Its inspected source snapshot contains 8,300 image-dialogue records (RGB 6,659; SAR 1,348; PAN 193; NIR 100); this source count is separate from the approximately 810K stage-wise CPRS supervision records.
 - The original stage-specific subfolders under [`examples/dataset_samples`](examples/dataset_samples) retain 12 inspection samples spanning the three CPRS supervision layers and RGB, SAR, PAN, and NIR imagery.
 - [`examples/benchmark_samples`](examples/benchmark_samples) contains six input-only examples from HarborEval, OpenEval, and RSVQA-Harbor. Private reference answers are omitted, and published held-out examples are recorded for exclusion from future score reporting.
+
+<table align="center">
+  <tr>
+    <th align="center">RGB</th>
+    <th align="center">SAR</th>
+  </tr>
+  <tr>
+    <td align="center"><a href="examples/dataset_samples/cprs_source_showcase/images/rgb_00003.png"><img src="examples/dataset_samples/cprs_source_showcase/images/rgb_00003.png" alt="CPRS RGB harbor sample" width="240"></a></td>
+    <td align="center"><a href="examples/dataset_samples/cprs_source_showcase/images/sar_00001.png"><img src="examples/dataset_samples/cprs_source_showcase/images/sar_00001.png" alt="CPRS SAR harbor sample" width="240"></a></td>
+  </tr>
+  <tr>
+    <th align="center">PAN</th>
+    <th align="center">NIR</th>
+  </tr>
+  <tr>
+    <td align="center"><a href="examples/dataset_samples/cprs_source_showcase/images/pan_00115.png"><img src="examples/dataset_samples/cprs_source_showcase/images/pan_00115.png" alt="CPRS PAN harbor sample" width="240"></a></td>
+    <td align="center"><a href="examples/dataset_samples/cprs_source_showcase/images/nir_00001.png"><img src="examples/dataset_samples/cprs_source_showcase/images/nir_00001.png" alt="CPRS NIR harbor sample" width="240"></a></td>
+  </tr>
+</table>
+
+<p><a href="https://z0ngl1ng.github.io/filling-before-advancing/#evidence">Explore all eight cases, switch sensors, and inspect the 3×3 grid answers on the website →</a></p>
 
 These compact showcases illustrate record structure and visual-task coverage; they are not substitutes for the full resource release.
 

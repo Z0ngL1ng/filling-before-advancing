@@ -9,16 +9,19 @@
 </p>
 
 <p align="center">
-  <a href="https://arxiv.org/abs/2607.22205"><img src="https://img.shields.io/badge/arXiv-2607.22205-b31b1b.svg?logo=arxiv" alt="arXiv" style="vertical-align: middle;"></a>
-  &nbsp;|&nbsp;
-  <a href="https://z0ngl1ng.github.io/filling-before-advancing/?lang=zh"><img src="https://img.shields.io/badge/Project-Website-39766b.svg" alt="项目宣传网页" style="vertical-align: middle;"></a>
-  &nbsp;|&nbsp;
+  <a href="https://arxiv.org/abs/2607.22205"><img src="https://img.shields.io/badge/arXiv-2607.22205-b31b1b.svg?logo=arxiv&amp;style=flat-square" alt="arXiv:2607.22205" height="24"></a>
+  &nbsp;
+  <a href="https://z0ngl1ng.github.io/filling-before-advancing/?lang=zh"><img src="https://img.shields.io/badge/Project-Website-39766b.svg?style=flat-square" alt="项目宣传网页" height="24"></a>
+  &nbsp;
   <!-- Hugging Face 占位：获得网址后，为相应徽章添加链接。 -->
-  <img src="https://img.shields.io/badge/Hugging_Face-Models_pending-888888.svg?logo=huggingface" alt="Hugging Face 模型：待上线" style="vertical-align: middle;">
-  <img src="https://img.shields.io/badge/Hugging_Face-Datasets_pending-888888.svg?logo=huggingface" alt="Hugging Face 数据集：待上线" style="vertical-align: middle;">
-  &nbsp;|&nbsp;
-  <a href="README.md">English</a> | <a href="README_zh-CN.md">简体中文</a>
+  <img src="https://img.shields.io/badge/HF_Models-Coming_soon-888888.svg?logo=huggingface&amp;style=flat-square" alt="Hugging Face 模型：待上线" height="24">
+  &nbsp;
+  <img src="https://img.shields.io/badge/HF_Datasets-Coming_soon-888888.svg?logo=huggingface&amp;style=flat-square" alt="Hugging Face 数据集：待上线" height="24">
 </p>
+
+<p align="center"><a href="README.md">English</a> · <strong>简体中文</strong></p>
+
+<p align="center"><a href="#方法">方法</a> &nbsp;·&nbsp; <a href="#数据集与评测基准制备">数据与样张</a> &nbsp;·&nbsp; <a href="#实验结果">实验结果</a> &nbsp;·&nbsp; <a href="#发布状态">发布状态</a> &nbsp;·&nbsp; <a href="#引用与许可证">引用</a></p>
 
 </div>
 
@@ -34,9 +37,9 @@
 
 我们在多源海港遥感理解中实例化 FBA，并构建：
 
-- **CPRS**：约 810K 条、按三类能力角色组织的训练监督；
-- **HarborEval**：覆盖 471 幅图像的 1,245 个诊断评测项，包含 RGB、SAR、PAN、NIR；
-- 基于 **LLaVA-v1.5** 和 **Qwen3-VL** 的受控实验。
+| CPRS 训练监督 | HarborEval 诊断评测 | 实验骨干 |
+| :---: | :---: | :---: |
+| **约 810K 条**<br>三个能力对齐的监督层 | **1,245 项 · 471 幅图像**<br>RGB · SAR · PAN · NIR | **LLaVA-v1.5 · Qwen3-VL**<br>受控后训练比较 |
 
 ## 为什么叫作“Filling Before Advancing”？
 
@@ -104,6 +107,27 @@ HarborEval 包含 **1,245 个评测项和 471 幅唯一图像**，其中 **1,154
 - **优先浏览的源数据展示：** [`examples/dataset_samples/cprs_source_showcase`](examples/dataset_samples/cprs_source_showcase) 提供八个清晰源数据案例，每种传感器两个，包含按图像改写的网格问答、跨格定位与对象关系。项目网页支持切换案例并查看 3×3 网格答案。本次核对的源数据快照包含 8,300 条图像—对话记录（RGB 6,659；SAR 1,348；PAN 193；NIR 100）；该源数据数量与约 810K 条分阶段 CPRS 训练监督采用不同口径。
 - [`examples/dataset_samples`](examples/dataset_samples) 下原有的三个阶段子目录保留 12 个检查样例，覆盖 CPRS 的三个监督层以及 RGB、SAR、PAN 和 NIR 图像。
 - [`examples/benchmark_samples`](examples/benchmark_samples) 提供来自 HarborEval、OpenEval 和 RSVQA-Harbor 的 6 个仅输入样例。私有参考答案未被公开，已展示的留出样例也会被记录并从后续分数报告中排除。
+
+<table align="center">
+  <tr>
+    <th align="center">RGB</th>
+    <th align="center">SAR</th>
+  </tr>
+  <tr>
+    <td align="center"><a href="examples/dataset_samples/cprs_source_showcase/images/rgb_00003.png"><img src="examples/dataset_samples/cprs_source_showcase/images/rgb_00003.png" alt="CPRS RGB harbor sample" width="240"></a></td>
+    <td align="center"><a href="examples/dataset_samples/cprs_source_showcase/images/sar_00001.png"><img src="examples/dataset_samples/cprs_source_showcase/images/sar_00001.png" alt="CPRS SAR harbor sample" width="240"></a></td>
+  </tr>
+  <tr>
+    <th align="center">PAN</th>
+    <th align="center">NIR</th>
+  </tr>
+  <tr>
+    <td align="center"><a href="examples/dataset_samples/cprs_source_showcase/images/pan_00115.png"><img src="examples/dataset_samples/cprs_source_showcase/images/pan_00115.png" alt="CPRS PAN harbor sample" width="240"></a></td>
+    <td align="center"><a href="examples/dataset_samples/cprs_source_showcase/images/nir_00001.png"><img src="examples/dataset_samples/cprs_source_showcase/images/nir_00001.png" alt="CPRS NIR harbor sample" width="240"></a></td>
+  </tr>
+</table>
+
+<p><a href="https://z0ngl1ng.github.io/filling-before-advancing/?lang=zh#evidence">在网页中浏览八个案例、切换传感器并查看 3×3 网格答案 →</a></p>
 
 这些轻量展示包用于说明记录结构和视觉任务覆盖，不代替后续发布的完整资源。
 
