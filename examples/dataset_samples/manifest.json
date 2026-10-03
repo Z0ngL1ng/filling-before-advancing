@@ -1,6 +1,12 @@
 {
   "name": "LLaVA three-stage training showcase",
   "sample_only": true,
+  "source_showcase": {
+    "path": "cprs_source_showcase",
+    "sample_count": 8,
+    "samples_per_modality": 2,
+    "scope": "Illustrative grid-based dialogue adapted from CPRS source images, separate from final stage-specific student exports and official benchmarks."
+  },
   "stages": {
     "stage1_alignment": 3,
     "stage2_modality_adaptation": 4,

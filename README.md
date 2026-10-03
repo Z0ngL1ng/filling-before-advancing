@@ -97,7 +97,8 @@ HarborEval contains **1,245 items over 471 unique images**, including **1,154 st
 
 ### Public sample showcases
 
-- [`examples/dataset_samples`](examples/dataset_samples) contains 12 inspection samples spanning the three CPRS supervision layers and RGB, SAR, PAN, and NIR imagery.
+- **Preferred data showcase:** [`examples/dataset_samples/cprs_source_showcase`](examples/dataset_samples/cprs_source_showcase) provides eight clear source-data cases, two per sensor, with image-grounded grid dialogue, multi-cell localization, and object relations. The project website lets visitors switch cases and inspect the 3×3 grid answers. Its inspected source snapshot contains 8,300 image-dialogue records (RGB 6,659; SAR 1,348; PAN 193; NIR 100); this source count is separate from the approximately 810K stage-wise CPRS supervision records.
+- The original stage-specific subfolders under [`examples/dataset_samples`](examples/dataset_samples) retain 12 inspection samples spanning the three CPRS supervision layers and RGB, SAR, PAN, and NIR imagery.
 - [`examples/benchmark_samples`](examples/benchmark_samples) contains six input-only examples from HarborEval, OpenEval, and RSVQA-Harbor. Private reference answers are omitted, and published held-out examples are recorded for exclusion from future score reporting.
 
 These compact showcases illustrate record structure and visual-task coverage; they are not substitutes for the full resource release.

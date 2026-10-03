@@ -16,12 +16,14 @@ Open <http://localhost:8765/>. `?lang=en` and `?lang=zh` set the entry language;
 
 ## Content and assets
 
-Research claims, author order, scores, citation, and release status follow the repository README. Update the website when those facts change. The interactive examples show training supervision; they do not present benchmark answers or model predictions. The PAN answer is explicitly identified as an excerpt. Chinese sample text is a translation of the public English record.
+Research claims, author order, scores, citation, and release status follow the repository README. Update the website when those facts change. The interactive gallery shows eight curated CPRS source-data cases from `examples/dataset_samples/cprs_source_showcase`, with two cases per sensor. The 8,300-record source snapshot is explicitly distinguished from the approximately 810K stage-wise supervision corpus. Existing stage-specific and benchmark showcases remain available separately.
 
-- `assets/rgb.png`: `examples/dataset_samples/stage3_harbor_reasoning/images/s3_01_presence_or_evidence_rgb.png`
-- `assets/nir.png`: `examples/dataset_samples/stage3_harbor_reasoning/images/s3_02_grid_nir.png`
-- `assets/sar.jpg`: `examples/dataset_samples/stage2_modality_adaptation/images/s2_02_sar_modality_boundary.jpg`
-- `assets/pan.png`: `examples/dataset_samples/stage2_modality_adaptation/images/s2_03_pan_modality_grounded_prompt.png`
+- `data/cprs-showcase.json`: grid convention, adapted English dialogue, Chinese translations, grid answer cells, and object relations for the eight cases.
+- `assets/rgb_*.png`, `assets/sar_*.png`, `assets/pan_*.png`, `assets/nir_*.png`: unchanged copies of the corresponding curated source showcase images.
 - `assets/fba_stages.png`: the existing `assets/fba_stages.png` research figure.
 
-These are unchanged copies of already-public repository assets. Existing source resource licenses and usage conditions apply. No external fonts, analytics, or frontend packages are required.
+The gallery lets visitors select a sensor and case, view adapted multi-turn dialogue and object relations, overlay a 3 × 3 grid, and open the original image. Names follow the project's existing top/middle/bottom and left/center/right convention. Colored cells correspond to the first grid answer; questions distinguish a target's extent, center, or clearest visible region. Multi-cell answers are supported.
+
+The questions and answers were rewritten after visual inspection for this illustrative showcase. They are not verbatim source dialogue or official benchmark annotations. Chinese text translates the adapted English dialogue. Image pixels and source files are unchanged. The linked sample JSON records the source and the adaptation and uses grid names for spatial answers.
+
+The default English first example and resource links remain readable without JavaScript. Gallery switching and overlays require JavaScript. Existing source resource licenses and usage conditions apply. No external fonts, analytics, or frontend packages are required.

@@ -1,0 +1,52 @@
+{
+  "scope": "Inspected CPRS source snapshot, not the approximately 810K stage-wise supervision corpus.",
+  "total_records": 8300,
+  "modalities": [
+    {
+      "modality": "RGB",
+      "records": 6659,
+      "object_categories": 19,
+      "source_turns": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "modality": "SAR",
+      "records": 1348,
+      "object_categories": 11,
+      "source_turns": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "modality": "PAN",
+      "records": 193,
+      "object_categories": 12,
+      "source_turns": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "modality": "NIR",
+      "records": 100,
+      "object_categories": 9,
+      "source_turns": [
+        2,
+        3,
+        4
+      ]
+    }
+  ],
+  "image_size": [
+    512,
+    512
+  ],
+  "sample_count": 8,
+  "same_number_is_not_paired_across_sensors": true
+}

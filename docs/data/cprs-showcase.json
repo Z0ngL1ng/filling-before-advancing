@@ -1,0 +1,610 @@
+{
+  "profile": [
+    {
+      "modality": "RGB",
+      "records": 6659,
+      "object_categories": 19,
+      "source_turns": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "modality": "SAR",
+      "records": 1348,
+      "object_categories": 11,
+      "source_turns": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "modality": "PAN",
+      "records": 193,
+      "object_categories": 12,
+      "source_turns": [
+        2,
+        3,
+        4
+      ]
+    },
+    {
+      "modality": "NIR",
+      "records": 100,
+      "object_categories": 9,
+      "source_turns": [
+        2,
+        3,
+        4
+      ]
+    }
+  ],
+  "samples": [
+    {
+      "id": "RGB_00003",
+      "modality": "rgb",
+      "image": "rgb_00003.png",
+      "title": [
+        "Harbor ship & warehouse grids",
+        "港区船舶与仓库网格定位"
+      ],
+      "why": [
+        "The main vessel crosses two adjacent cells; the warehouse cluster provides a separate grounding target.",
+        "主要船舶跨越相邻两格，仓库群提供另一处网格定位目标。"
+      ],
+      "turns": [
+        {
+          "question": [
+            "Which grid cells visibly contain the main large vessel beside the central quay? Select all supported cells.",
+            "中央岸壁旁的主要大型船舶可见于哪些网格？选出所有有图像支持的格子。"
+          ],
+          "answer": [
+            "middle-center, middle-right.",
+            "中央、右中。"
+          ]
+        },
+        {
+          "question": [
+            "Which grid cell contains the clearest large warehouse cluster in the lower-left area? Answer with one cell name.",
+            "左下区域最清晰的大型仓库群位于哪个网格？只回答一个格子。"
+          ],
+          "answer": [
+            "bottom-left.",
+            "左下。"
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "subject": "ship",
+          "predicate": "docked_at",
+          "object": "pier"
+        },
+        {
+          "subject": "warehouse",
+          "predicate": "next_to",
+          "object": "warehouse"
+        },
+        {
+          "subject": "ship",
+          "predicate": "near",
+          "object": "warehouse"
+        }
+      ],
+      "source": "cprs_source_showcase/samples.json",
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "main vessel",
+          "cells": [
+            "middle-center",
+            "middle-right"
+          ],
+          "selection_rule": "visible_extent"
+        },
+        {
+          "turn": 2,
+          "target": "clearest lower-left warehouse cluster",
+          "cells": [
+            "bottom-left"
+          ],
+          "selection_rule": "clearest_region"
+        }
+      ],
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    },
+    {
+      "id": "RGB_06670",
+      "modality": "rgb",
+      "image": "rgb_06670.png",
+      "title": [
+        "Ship center & crane region",
+        "船舶中心与起重机区域"
+      ],
+      "why": [
+        "The vessel center and the prominent orange crane offer distinct grid-based references.",
+        "船舶中心与显著的橙色起重机提供两个不同的网格参照。"
+      ],
+      "turns": [
+        {
+          "question": [
+            "Which grid cell contains the center of the main ship in the upper half of the image? Answer with one cell name.",
+            "图像上半部主要船舶的中心位于哪个网格？只回答一个格子。"
+          ],
+          "answer": [
+            "middle-center.",
+            "中央。"
+          ]
+        },
+        {
+          "question": [
+            "Which grid cell contains the most prominent orange crane near the lower-right part of the pier?",
+            "码头右下部最显著的橙色起重机位于哪个网格？"
+          ],
+          "answer": [
+            "bottom-right.",
+            "右下。"
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "subject": "ship",
+          "predicate": "docked_at",
+          "object": "pier"
+        },
+        {
+          "subject": "crane",
+          "predicate": "next_to",
+          "object": "ship"
+        },
+        {
+          "subject": "pier",
+          "predicate": "adjacent_to",
+          "object": "water_body"
+        }
+      ],
+      "source": "cprs_source_showcase/samples.json",
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "main ship center",
+          "cells": [
+            "middle-center"
+          ],
+          "selection_rule": "target_center"
+        },
+        {
+          "turn": 2,
+          "target": "prominent orange crane",
+          "cells": [
+            "bottom-right"
+          ],
+          "selection_rule": "clearest_region"
+        }
+      ],
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    },
+    {
+      "id": "SAR_00001",
+      "modality": "sar",
+      "image": "sar_00001.png",
+      "title": [
+        "Two bright returns in separate rows",
+        "不同行中的两个明亮回波"
+      ],
+      "why": [
+        "The centers of the two elongated bright returns are separated into upper and lower grid rows.",
+        "两个细长明亮回波的中心分别位于网格的上排与下排。"
+      ],
+      "turns": [
+        {
+          "question": [
+            "Which grid cells contain the centers of the two main elongated bright vessel-like returns? Select both cells.",
+            "两个主要细长类船舶明亮回波的中心分别位于哪些网格？选择两个格子。"
+          ],
+          "answer": [
+            "top-center, bottom-center.",
+            "上中、下中。"
+          ]
+        },
+        {
+          "question": [
+            "Can their exact operational status be established from this single SAR image?",
+            "仅凭这幅 SAR 图像，能否确定它们的确切作业状态？"
+          ],
+          "answer": [
+            "Cannot determine. The visible returns support localization, but do not establish exact operational status.",
+            "无法确定。可见回波支持位置判断，但不能确定其确切作业状态。"
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "subject": "ship",
+          "predicate": "docked_at",
+          "object": "pier"
+        }
+      ],
+      "source": "cprs_source_showcase/samples.json",
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "centers of two main elongated returns",
+          "cells": [
+            "top-center",
+            "bottom-center"
+          ],
+          "selection_rule": "target_centers"
+        }
+      ],
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    },
+    {
+      "id": "SAR_01202",
+      "modality": "sar",
+      "image": "sar_01202.png",
+      "title": [
+        "Central radar return & port structure",
+        "中央雷达回波与港区结构"
+      ],
+      "why": [
+        "Ground the central portion of an elongated return, then describe its visible relation to port structures.",
+        "先定位细长回波的中央部分，再描述它与港区结构的可见关系。"
+      ],
+      "turns": [
+        {
+          "question": [
+            "Which grid cell contains the central portion of the prominent elongated bright return near the central port structures?",
+            "中央港区结构附近的显著细长明亮回波，其中央部分位于哪个网格？"
+          ],
+          "answer": [
+            "middle-center.",
+            "中央。"
+          ]
+        },
+        {
+          "question": [
+            "Does this return appear isolated in open water or adjacent to the port structures?",
+            "该回波看起来是孤立于开阔水域，还是邻近港区结构？"
+          ],
+          "answer": [
+            "It appears adjacent to the port structures around middle-center.",
+            "它看起来邻近中央网格附近的港区结构。"
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "subject": "ship",
+          "predicate": "docked_at",
+          "object": "pier"
+        },
+        {
+          "subject": "crane",
+          "predicate": "near",
+          "object": "ship"
+        },
+        {
+          "subject": "pier",
+          "predicate": "adjacent_to",
+          "object": "water_body"
+        }
+      ],
+      "source": "cprs_source_showcase/samples.json",
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "central portion of the elongated bright return",
+          "cells": [
+            "middle-center"
+          ],
+          "selection_rule": "central_portion"
+        }
+      ],
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    },
+    {
+      "id": "PAN_00115",
+      "modality": "pan",
+      "image": "pan_00115.png",
+      "title": [
+        "A vessel spanning the left column",
+        "跨越左列的大型船舶"
+      ],
+      "why": [
+        "The large vessel spans three cells, while the nearby small boat provides a finer spatial reference.",
+        "大型船舶跨越三个格子，邻近小船提供更细致的空间参照。"
+      ],
+      "turns": [
+        {
+          "question": [
+            "Which grid cells visibly contain the large vessel along the left side? Select all supported cells.",
+            "左侧大型船舶可见于哪些网格？选出所有有图像支持的格子。"
+          ],
+          "answer": [
+            "top-left, middle-left, bottom-left.",
+            "左上、左中、左下。"
+          ]
+        },
+        {
+          "question": [
+            "Which grid cell contains the small boat near the lower end of the large vessel?",
+            "大型船舶下端附近的小船位于哪个网格？"
+          ],
+          "answer": [
+            "bottom-center.",
+            "下中。"
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "subject": "ship",
+          "predicate": "docked_at",
+          "object": "pier"
+        },
+        {
+          "subject": "small_boat",
+          "predicate": "near",
+          "object": "ship"
+        },
+        {
+          "subject": "pier",
+          "predicate": "adjacent_to",
+          "object": "water_body"
+        }
+      ],
+      "source": "cprs_source_showcase/samples.json",
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "large vessel along the left side",
+          "cells": [
+            "top-left",
+            "middle-left",
+            "bottom-left"
+          ],
+          "selection_rule": "visible_extent"
+        },
+        {
+          "turn": 2,
+          "target": "small boat near the lower end",
+          "cells": [
+            "bottom-center"
+          ],
+          "selection_rule": "clearest_region"
+        }
+      ],
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    },
+    {
+      "id": "PAN_00002",
+      "modality": "pan",
+      "image": "pan_00002.png",
+      "title": [
+        "Upper and lower coastal vessels",
+        "沿岸上部与下部船舶"
+      ],
+      "why": [
+        "Compare the clearly visible upper and lower vessels using their centers as grid references.",
+        "以清晰可见的上部与下部船舶中心为参照，比较网格位置。"
+      ],
+      "turns": [
+        {
+          "question": [
+            "Which grid cell contains the center of the uppermost prominent vessel beside the shoreline?",
+            "岸线旁最上方的显著船舶，其中心位于哪个网格？"
+          ],
+          "answer": [
+            "top-center.",
+            "上中。"
+          ]
+        },
+        {
+          "question": [
+            "Which grid cell contains the center of the lowest prominent coastal vessel?",
+            "最下方的显著沿岸船舶，其中心位于哪个网格？"
+          ],
+          "answer": [
+            "bottom-left.",
+            "左下。"
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "subject": "ship",
+          "predicate": "docked_at",
+          "object": "pier"
+        },
+        {
+          "subject": "ship",
+          "predicate": "near",
+          "object": "pier"
+        },
+        {
+          "subject": "pier",
+          "predicate": "adjacent_to",
+          "object": "ship"
+        }
+      ],
+      "source": "cprs_source_showcase/samples.json",
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "center of the uppermost prominent vessel",
+          "cells": [
+            "top-center"
+          ],
+          "selection_rule": "target_center"
+        },
+        {
+          "turn": 2,
+          "target": "center of the lowest prominent coastal vessel",
+          "cells": [
+            "bottom-left"
+          ],
+          "selection_rule": "target_center"
+        }
+      ],
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    },
+    {
+      "id": "NIR_00001",
+      "modality": "nir",
+      "image": "nir_00001.png",
+      "title": [
+        "Warehouse region & visible uncertainty",
+        "仓库区域与可见证据边界"
+      ],
+      "why": [
+        "Locate the clearest warehouse cluster and keep vessel claims within visible evidence.",
+        "定位最清晰的仓库群，并让船舶判断符合可见证据。"
+      ],
+      "turns": [
+        {
+          "question": [
+            "Which grid cell contains the clearest dense warehouse cluster? Answer with one cell name.",
+            "最清晰的密集仓库群位于哪个网格？只回答一个格子。"
+          ],
+          "answer": [
+            "bottom-left.",
+            "左下。"
+          ]
+        },
+        {
+          "question": [
+            "Are ships or boats clearly identifiable in the visible water area?",
+            "可见水域中是否有清晰可辨认的船舶？"
+          ],
+          "answer": [
+            "No clearly identifiable vessel is supported by the visible image; the main visible structures are the bridge and the onshore industrial area.",
+            "可见图像未支持清晰可辨认的船舶目标；主要可见结构是桥梁与岸上工业区。"
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "subject": "warehouse",
+          "predicate": "next_to",
+          "object": "warehouse"
+        }
+      ],
+      "source": "cprs_source_showcase/samples.json",
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "clearest dense warehouse cluster",
+          "cells": [
+            "bottom-left"
+          ],
+          "selection_rule": "clearest_region"
+        }
+      ],
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    },
+    {
+      "id": "NIR_00055",
+      "modality": "nir",
+      "image": "nir_00055.png",
+      "title": [
+        "Vessel and warehouses across cell boundaries",
+        "跨格船舶与仓库"
+      ],
+      "why": [
+        "The edge-side vessel and bright warehouse structures each cross a grid-row boundary.",
+        "边缘船舶与明亮仓库结构分别跨越一条网格行边界。"
+      ],
+      "turns": [
+        {
+          "question": [
+            "Which grid cells visibly contain the large vessel near the lower-right edge? Select all supported cells.",
+            "右下边缘的大型船舶可见于哪些网格？选出所有有图像支持的格子。"
+          ],
+          "answer": [
+            "middle-right, bottom-right.",
+            "右中、右下。"
+          ]
+        },
+        {
+          "question": [
+            "Which grid cells visibly contain the main bright rectangular warehouse structures on the right?",
+            "右侧主要明亮矩形仓库结构可见于哪些网格？"
+          ],
+          "answer": [
+            "top-right, middle-right.",
+            "右上、右中。"
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "subject": "ship",
+          "predicate": "docked_at",
+          "object": "pier"
+        },
+        {
+          "subject": "warehouse",
+          "predicate": "near",
+          "object": "pier"
+        },
+        {
+          "subject": "ship",
+          "predicate": "near",
+          "object": "warehouse"
+        }
+      ],
+      "source": "cprs_source_showcase/samples.json",
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "large vessel near the lower-right edge",
+          "cells": [
+            "middle-right",
+            "bottom-right"
+          ],
+          "selection_rule": "visible_extent"
+        },
+        {
+          "turn": 2,
+          "target": "main bright rectangular warehouse structures",
+          "cells": [
+            "top-right",
+            "middle-right"
+          ],
+          "selection_rule": "visible_extent"
+        }
+      ],
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    }
+  ],
+  "grid": {
+    "rows": 3,
+    "columns": 3,
+    "cell_names": [
+      "top-left",
+      "top-center",
+      "top-right",
+      "middle-left",
+      "middle-center",
+      "middle-right",
+      "bottom-left",
+      "bottom-center",
+      "bottom-right"
+    ],
+    "cell_names_zh": [
+      "左上",
+      "上中",
+      "右上",
+      "左中",
+      "中央",
+      "右中",
+      "左下",
+      "下中",
+      "右下"
+    ]
+  }
+}

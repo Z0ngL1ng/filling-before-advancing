@@ -1,29 +1,93 @@
 'use strict';
 
 const base = 'https://github.com/Z0ngL1ng/filling-before-advancing/blob/main/examples/dataset_samples/';
-const samples = {
-  rgb: { image: 'rgb.png', badge: 'RGB / Scenario-EG', source: 'stage3_harbor_reasoning/samples.json', task: ['PRESENCE VALIDATION', '存在性验证'], question: ['Is a water body visible in this image?', '这幅图像中是否能看到水体？'], answer: ['Yes.', '是。'] },
-  sar: { image: 'sar.jpg', badge: 'SAR / Bridge-Conv', source: 'stage2_modality_adaptation/samples.json', task: ['SENSOR-AWARE UNCERTAINTY', '传感器感知边界与不确定性'], question: ['Can the exact operational status of a vessel-like return be confirmed from one SAR image?', '仅凭一幅 SAR 图像，能否确认类船舶回波的确切作业状态？'], answer: ['Cannot determine. A vessel-like return may be visible, but exact operational status is not established by a single SAR image.', '无法判断。可能存在类船舶回波，但单幅 SAR 图像无法确认其确切作业状态。'] },
-  pan: { image: 'pan.png', badge: 'PAN / Bridge-Conv', source: 'stage2_modality_adaptation/samples.json', task: ['STRUCTURAL DESCRIPTION', '结构描述'], question: ['Describe the scene using grayscale tone, shape, texture, edges, and layout; do not infer natural color.', '依据灰度、形状、纹理、边缘与布局描述场景，不推断自然颜色。'], answer: ['A wide, smooth waterway stretches diagonally across the scene, separating two distinct land areas. On the right bank, a dense cluster of small, bright rectangular buildings forms a grid-like town adjacent to a linear road.', '宽阔而平滑的水道斜穿场景，将两片陆地区域分开。右岸密集的小型明亮矩形建筑构成网格状聚落，邻近一条线状道路。'], excerpt: true },
-  nir: { image: 'nir.png', badge: 'NIR / Scenario-EG', source: 'stage3_harbor_reasoning/samples.json', task: ['GRID GROUNDING', '网格定位'], question: ['In a 3×3 grid, which cell contains the most visually clear water body?', '在 3×3 网格中，哪个网格包含视觉上最清晰的水体？'], answer: ['Top-left.', '左上。'] }
-};
+let samples = [];
 let language = 'en';
 let activeSensor = 'rgb';
+let activeCase = 0;
 const languageButton = document.getElementById('language');
 const tabs = Array.from(document.querySelectorAll('[data-sensor]'));
+const caseSelect = document.getElementById('sample-select');
+const gridToggle = document.getElementById('show-grid');
+const gridCells = ['top-left', 'top-center', 'top-right', 'middle-left', 'middle-center', 'middle-right', 'bottom-left', 'bottom-center', 'bottom-right'];
+const gridLabelsZh = ['左上', '上中', '右上', '左中', '中央', '右中', '左下', '下中', '右下'];
+
+function drawGrid(sample) {
+  const svg = document.getElementById('grid-overlay');
+  svg.replaceChildren();
+  svg.toggleAttribute('hidden', !gridToggle.checked);
+  const answerCells = new Set(sample.grid_grounding[0].cells);
+  const step = 512 / 3;
+  gridCells.forEach((cell, index) => {
+    const x = (index % 3) * step;
+    const y = Math.floor(index / 3) * step;
+    const selected = answerCells.has(cell);
+    const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    Object.entries({x, y, width: step, height: step, fill: selected ? '#edaa86' : 'none', 'fill-opacity': 0.16, stroke: '#eceee5', 'stroke-opacity': 0.7, 'stroke-width': 1, 'vector-effect': 'non-scaling-stroke', 'data-cell': cell, 'data-answer': String(selected)}).forEach(([key, value]) => rect.setAttribute(key, value));
+    svg.append(rect);
+    const background = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    Object.entries({x: x + 4, y: y + 4, width: language === 'en' ? 119 : 43, height: 21, fill: '#202b2c', 'fill-opacity': 0.85}).forEach(([key, value]) => background.setAttribute(key, value));
+    svg.append(background);
+    const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    label.setAttribute('x', x + 9);
+    label.setAttribute('y', y + 19);
+    label.setAttribute('fill', selected ? '#f4c4a3' : '#ecf1ec');
+    label.setAttribute('font-size', '13');
+    label.setAttribute('font-family', 'sans-serif');
+    label.textContent = language === 'en' ? cell : gridLabelsZh[index];
+    svg.append(label);
+  });
+}
 
 function renderSample() {
-  const sample = samples[activeSensor];
+  const cases = samples.filter(sample => sample.modality === activeSensor);
+  if (!cases.length) return;
+  const sample = cases[activeCase] || cases[0];
   const index = language === 'en' ? 0 : 1;
+  const firstTurn = sample.turns[0];
+  caseSelect.replaceChildren();
+  cases.forEach((item, optionIndex) => {
+    const option = document.createElement('option');
+    option.value = optionIndex;
+    option.textContent = `${optionIndex + 1}. ${item.title[index]}`;
+    option.selected = optionIndex === activeCase;
+    caseSelect.append(option);
+  });
   const image = document.getElementById('sensor-image');
   image.src = `assets/${sample.image}`;
-  image.alt = language === 'en' ? `${activeSensor.toUpperCase()} image from the public training showcase` : `公开训练样张中的 ${activeSensor.toUpperCase()} 图像`;
-  document.getElementById('sensor-badge').textContent = sample.badge;
-  document.getElementById('sensor-task').textContent = sample.task[index] + (sample.excerpt ? (index === 0 ? ' / ANSWER EXCERPT' : ' / 回答节选') : '');
-  document.getElementById('sensor-question').textContent = sample.question[index];
-  document.getElementById('sensor-answer').textContent = sample.answer[index];
+  image.alt = `${activeSensor.toUpperCase()} · ${sample.title[index]}`;
+  document.getElementById('full-image').href = image.src;
+  document.getElementById('sensor-badge').textContent = `${activeSensor.toUpperCase()} / CPRS · ${sample.id.split('_')[1]}`;
+  document.getElementById('sensor-task').textContent = language === 'en' ? 'GRID GROUNDING / ILLUSTRATIVE DIALOGUE' : '网格定位 / 展示问答';
+  document.getElementById('sensor-question').textContent = firstTurn.question[index];
+  document.getElementById('sensor-answer').textContent = firstTurn.answer[index];
+  document.getElementById('sample-why').textContent = sample.why[index];
   document.getElementById('sensor-source').href = base + sample.source;
   document.getElementById('sensor-panel').setAttribute('aria-labelledby', `tab-${activeSensor}`);
+  const relations = document.getElementById('sample-relations');
+  relations.replaceChildren();
+  sample.relations.forEach(relation => {
+    const item = document.createElement('span');
+    item.textContent = `${relation.subject} → ${relation.predicate} → ${relation.object}`;
+    relations.append(item);
+  });
+  document.getElementById('dialogue-summary').textContent = language === 'en' ? `View selected dialogue (${sample.turns.length} turns)` : `查看精选对话（${sample.turns.length} 轮）`;
+  const dialogue = document.getElementById('dialogue-turns');
+  dialogue.replaceChildren();
+  sample.turns.forEach((turn, turnIndex) => {
+    const article = document.createElement('article');
+    const label = document.createElement('span');
+    label.className = 'tiny';
+    label.textContent = language === 'en' ? `TURN ${turnIndex + 1}` : `第 ${turnIndex + 1} 轮`;
+    const question = document.createElement('p');
+    question.className = 'dialogue-question';
+    question.textContent = turn.question[index];
+    const answer = document.createElement('p');
+    answer.textContent = turn.answer[index];
+    article.append(label, question, answer);
+    dialogue.append(article);
+  });
+  drawGrid(sample);
   tabs.forEach(tab => {
     const selected = tab.dataset.sensor === activeSensor;
     tab.setAttribute('aria-selected', String(selected));
@@ -45,7 +109,7 @@ function setLanguage(next) {
 
 languageButton.addEventListener('click', () => setLanguage(language === 'en' ? 'zh' : 'en'));
 tabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => { activeSensor = tab.dataset.sensor; renderSample(); });
+  tab.addEventListener('click', () => { activeSensor = tab.dataset.sensor; activeCase = 0; renderSample(); });
   tab.addEventListener('keydown', event => {
     let next;
     if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
@@ -55,9 +119,18 @@ tabs.forEach((tab, index) => {
     if (next === undefined) return;
     event.preventDefault();
     activeSensor = tabs[next].dataset.sensor;
+    activeCase = 0;
     renderSample();
     tabs[next].focus();
   });
+});
+
+caseSelect.addEventListener('change', () => {
+  activeCase = Number(caseSelect.value);
+  renderSample();
+});
+gridToggle.addEventListener('change', () => {
+  document.getElementById('grid-overlay').toggleAttribute('hidden', !gridToggle.checked);
 });
 
 document.getElementById('copy-citation').addEventListener('click', async () => {
@@ -80,3 +153,17 @@ if (initial !== 'en' && initial !== 'zh') {
   try { initial = localStorage.getItem('fba-language'); } catch (_) { initial = 'en'; }
 }
 setLanguage(initial === 'zh' ? 'zh' : 'en');
+
+async function loadShowcase() {
+  try {
+    const response = await fetch('data/cprs-showcase.json');
+    if (!response.ok) throw new Error('Showcase unavailable');
+    samples = (await response.json()).samples;
+    renderSample();
+    caseSelect.disabled = false;
+    gridToggle.disabled = false;
+  } catch (_) {
+    document.getElementById('gallery-status').textContent = language === 'en' ? 'More cases could not load. The first example and source link remain available.' : '其他案例暂未加载，可先查看首个样例与源记录链接。';
+  }
+}
+loadShowcase();

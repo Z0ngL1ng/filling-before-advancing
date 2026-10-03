@@ -1,0 +1,724 @@
+[
+  {
+    "id": "RGB_00003",
+    "images": [
+      "images/rgb_00003.png"
+    ],
+    "conversations": [
+      {
+        "role": "user",
+        "content": "The image is divided into a 3x3 grid: top-left, top-center, top-right, middle-left, middle-center, middle-right, bottom-left, bottom-center, bottom-right. Which grid cells visibly contain the main large vessel beside the central quay? Select all supported cells. <image>"
+      },
+      {
+        "role": "assistant",
+        "content": "middle-center, middle-right."
+      },
+      {
+        "role": "user",
+        "content": "Which grid cell contains the clearest large warehouse cluster in the lower-left area? Answer with one cell name."
+      },
+      {
+        "role": "assistant",
+        "content": "bottom-left."
+      }
+    ],
+    "meta": {
+      "modality": "RGB",
+      "image_size": [
+        512,
+        512
+      ],
+      "task_tags": [
+        "visual question answering (VQA)",
+        "grid grounding",
+        "spatial relation reasoning",
+        "evidence judgment"
+      ],
+      "relations": [
+        {
+          "subject": "ship",
+          "predicate": "docked_at",
+          "object": "pier"
+        },
+        {
+          "subject": "warehouse",
+          "predicate": "next_to",
+          "object": "warehouse"
+        },
+        {
+          "subject": "ship",
+          "predicate": "near",
+          "object": "warehouse"
+        }
+      ],
+      "grid": {
+        "rows": 3,
+        "columns": 3,
+        "cell_names": [
+          "top-left",
+          "top-center",
+          "top-right",
+          "middle-left",
+          "middle-center",
+          "middle-right",
+          "bottom-left",
+          "bottom-center",
+          "bottom-right"
+        ]
+      },
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "main vessel",
+          "cells": [
+            "middle-center",
+            "middle-right"
+          ],
+          "selection_rule": "visible_extent"
+        },
+        {
+          "turn": 2,
+          "target": "clearest lower-left warehouse cluster",
+          "cells": [
+            "bottom-left"
+          ],
+          "selection_rule": "clearest_region"
+        }
+      ]
+    },
+    "source": {
+      "record_id": "00003",
+      "record_file": "RGB/cprs_sharegpt.json",
+      "image": "RGB/images/0003.png",
+      "original_turn_count": 3,
+      "scope": "Illustrative grid-based showcase adaptation of source images; not an official training export or benchmark.",
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    }
+  },
+  {
+    "id": "RGB_06670",
+    "images": [
+      "images/rgb_06670.png"
+    ],
+    "conversations": [
+      {
+        "role": "user",
+        "content": "The image is divided into a 3x3 grid: top-left, top-center, top-right, middle-left, middle-center, middle-right, bottom-left, bottom-center, bottom-right. Which grid cell contains the center of the main ship in the upper half of the image? Answer with one cell name. <image>"
+      },
+      {
+        "role": "assistant",
+        "content": "middle-center."
+      },
+      {
+        "role": "user",
+        "content": "Which grid cell contains the most prominent orange crane near the lower-right part of the pier?"
+      },
+      {
+        "role": "assistant",
+        "content": "bottom-right."
+      }
+    ],
+    "meta": {
+      "modality": "RGB",
+      "image_size": [
+        512,
+        512
+      ],
+      "task_tags": [
+        "visual question answering (VQA)",
+        "grid grounding",
+        "spatial relation reasoning",
+        "evidence judgment"
+      ],
+      "relations": [
+        {
+          "subject": "ship",
+          "predicate": "docked_at",
+          "object": "pier"
+        },
+        {
+          "subject": "crane",
+          "predicate": "next_to",
+          "object": "ship"
+        },
+        {
+          "subject": "pier",
+          "predicate": "adjacent_to",
+          "object": "water_body"
+        }
+      ],
+      "grid": {
+        "rows": 3,
+        "columns": 3,
+        "cell_names": [
+          "top-left",
+          "top-center",
+          "top-right",
+          "middle-left",
+          "middle-center",
+          "middle-right",
+          "bottom-left",
+          "bottom-center",
+          "bottom-right"
+        ]
+      },
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "main ship center",
+          "cells": [
+            "middle-center"
+          ],
+          "selection_rule": "target_center"
+        },
+        {
+          "turn": 2,
+          "target": "prominent orange crane",
+          "cells": [
+            "bottom-right"
+          ],
+          "selection_rule": "clearest_region"
+        }
+      ]
+    },
+    "source": {
+      "record_id": "06670",
+      "record_file": "RGB/cprs_sharegpt.json",
+      "image": "RGB/images/6670.png",
+      "original_turn_count": 4,
+      "scope": "Illustrative grid-based showcase adaptation of source images; not an official training export or benchmark.",
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    }
+  },
+  {
+    "id": "SAR_00001",
+    "images": [
+      "images/sar_00001.png"
+    ],
+    "conversations": [
+      {
+        "role": "user",
+        "content": "The image is divided into a 3x3 grid: top-left, top-center, top-right, middle-left, middle-center, middle-right, bottom-left, bottom-center, bottom-right. Which grid cells contain the centers of the two main elongated bright vessel-like returns? Select both cells. <image>"
+      },
+      {
+        "role": "assistant",
+        "content": "top-center, bottom-center."
+      },
+      {
+        "role": "user",
+        "content": "Can their exact operational status be established from this single SAR image?"
+      },
+      {
+        "role": "assistant",
+        "content": "Cannot determine. The visible returns support localization, but do not establish exact operational status."
+      }
+    ],
+    "meta": {
+      "modality": "SAR",
+      "image_size": [
+        512,
+        512
+      ],
+      "task_tags": [
+        "visual question answering (VQA)",
+        "grid grounding",
+        "spatial relation reasoning",
+        "evidence judgment"
+      ],
+      "relations": [
+        {
+          "subject": "ship",
+          "predicate": "docked_at",
+          "object": "pier"
+        }
+      ],
+      "grid": {
+        "rows": 3,
+        "columns": 3,
+        "cell_names": [
+          "top-left",
+          "top-center",
+          "top-right",
+          "middle-left",
+          "middle-center",
+          "middle-right",
+          "bottom-left",
+          "bottom-center",
+          "bottom-right"
+        ]
+      },
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "centers of two main elongated returns",
+          "cells": [
+            "top-center",
+            "bottom-center"
+          ],
+          "selection_rule": "target_centers"
+        }
+      ]
+    },
+    "source": {
+      "record_id": "00001",
+      "record_file": "SAR/cprs_sharegpt.json",
+      "image": "SAR/images/0001.png",
+      "original_turn_count": 3,
+      "scope": "Illustrative grid-based showcase adaptation of source images; not an official training export or benchmark.",
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    }
+  },
+  {
+    "id": "SAR_01202",
+    "images": [
+      "images/sar_01202.png"
+    ],
+    "conversations": [
+      {
+        "role": "user",
+        "content": "The image is divided into a 3x3 grid: top-left, top-center, top-right, middle-left, middle-center, middle-right, bottom-left, bottom-center, bottom-right. Which grid cell contains the central portion of the prominent elongated bright return near the central port structures? <image>"
+      },
+      {
+        "role": "assistant",
+        "content": "middle-center."
+      },
+      {
+        "role": "user",
+        "content": "Does this return appear isolated in open water or adjacent to the port structures?"
+      },
+      {
+        "role": "assistant",
+        "content": "It appears adjacent to the port structures around middle-center."
+      }
+    ],
+    "meta": {
+      "modality": "SAR",
+      "image_size": [
+        512,
+        512
+      ],
+      "task_tags": [
+        "visual question answering (VQA)",
+        "grid grounding",
+        "spatial relation reasoning",
+        "evidence judgment"
+      ],
+      "relations": [
+        {
+          "subject": "ship",
+          "predicate": "docked_at",
+          "object": "pier"
+        },
+        {
+          "subject": "crane",
+          "predicate": "near",
+          "object": "ship"
+        },
+        {
+          "subject": "pier",
+          "predicate": "adjacent_to",
+          "object": "water_body"
+        }
+      ],
+      "grid": {
+        "rows": 3,
+        "columns": 3,
+        "cell_names": [
+          "top-left",
+          "top-center",
+          "top-right",
+          "middle-left",
+          "middle-center",
+          "middle-right",
+          "bottom-left",
+          "bottom-center",
+          "bottom-right"
+        ]
+      },
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "central portion of the elongated bright return",
+          "cells": [
+            "middle-center"
+          ],
+          "selection_rule": "central_portion"
+        }
+      ]
+    },
+    "source": {
+      "record_id": "01202",
+      "record_file": "SAR/cprs_sharegpt.json",
+      "image": "SAR/images/1202.png",
+      "original_turn_count": 4,
+      "scope": "Illustrative grid-based showcase adaptation of source images; not an official training export or benchmark.",
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    }
+  },
+  {
+    "id": "PAN_00115",
+    "images": [
+      "images/pan_00115.png"
+    ],
+    "conversations": [
+      {
+        "role": "user",
+        "content": "The image is divided into a 3x3 grid: top-left, top-center, top-right, middle-left, middle-center, middle-right, bottom-left, bottom-center, bottom-right. Which grid cells visibly contain the large vessel along the left side? Select all supported cells. <image>"
+      },
+      {
+        "role": "assistant",
+        "content": "top-left, middle-left, bottom-left."
+      },
+      {
+        "role": "user",
+        "content": "Which grid cell contains the small boat near the lower end of the large vessel?"
+      },
+      {
+        "role": "assistant",
+        "content": "bottom-center."
+      }
+    ],
+    "meta": {
+      "modality": "PAN",
+      "image_size": [
+        512,
+        512
+      ],
+      "task_tags": [
+        "visual question answering (VQA)",
+        "grid grounding",
+        "spatial relation reasoning",
+        "evidence judgment"
+      ],
+      "relations": [
+        {
+          "subject": "ship",
+          "predicate": "docked_at",
+          "object": "pier"
+        },
+        {
+          "subject": "small_boat",
+          "predicate": "near",
+          "object": "ship"
+        },
+        {
+          "subject": "pier",
+          "predicate": "adjacent_to",
+          "object": "water_body"
+        }
+      ],
+      "grid": {
+        "rows": 3,
+        "columns": 3,
+        "cell_names": [
+          "top-left",
+          "top-center",
+          "top-right",
+          "middle-left",
+          "middle-center",
+          "middle-right",
+          "bottom-left",
+          "bottom-center",
+          "bottom-right"
+        ]
+      },
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "large vessel along the left side",
+          "cells": [
+            "top-left",
+            "middle-left",
+            "bottom-left"
+          ],
+          "selection_rule": "visible_extent"
+        },
+        {
+          "turn": 2,
+          "target": "small boat near the lower end",
+          "cells": [
+            "bottom-center"
+          ],
+          "selection_rule": "clearest_region"
+        }
+      ]
+    },
+    "source": {
+      "record_id": "00115",
+      "record_file": "PAN/cprs_sharegpt.json",
+      "image": "PAN/images/0115.png",
+      "original_turn_count": 3,
+      "scope": "Illustrative grid-based showcase adaptation of source images; not an official training export or benchmark.",
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    }
+  },
+  {
+    "id": "PAN_00002",
+    "images": [
+      "images/pan_00002.png"
+    ],
+    "conversations": [
+      {
+        "role": "user",
+        "content": "The image is divided into a 3x3 grid: top-left, top-center, top-right, middle-left, middle-center, middle-right, bottom-left, bottom-center, bottom-right. Which grid cell contains the center of the uppermost prominent vessel beside the shoreline? <image>"
+      },
+      {
+        "role": "assistant",
+        "content": "top-center."
+      },
+      {
+        "role": "user",
+        "content": "Which grid cell contains the center of the lowest prominent coastal vessel?"
+      },
+      {
+        "role": "assistant",
+        "content": "bottom-left."
+      }
+    ],
+    "meta": {
+      "modality": "PAN",
+      "image_size": [
+        512,
+        512
+      ],
+      "task_tags": [
+        "visual question answering (VQA)",
+        "grid grounding",
+        "spatial relation reasoning",
+        "evidence judgment"
+      ],
+      "relations": [
+        {
+          "subject": "ship",
+          "predicate": "docked_at",
+          "object": "pier"
+        },
+        {
+          "subject": "ship",
+          "predicate": "near",
+          "object": "pier"
+        },
+        {
+          "subject": "pier",
+          "predicate": "adjacent_to",
+          "object": "ship"
+        }
+      ],
+      "grid": {
+        "rows": 3,
+        "columns": 3,
+        "cell_names": [
+          "top-left",
+          "top-center",
+          "top-right",
+          "middle-left",
+          "middle-center",
+          "middle-right",
+          "bottom-left",
+          "bottom-center",
+          "bottom-right"
+        ]
+      },
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "center of the uppermost prominent vessel",
+          "cells": [
+            "top-center"
+          ],
+          "selection_rule": "target_center"
+        },
+        {
+          "turn": 2,
+          "target": "center of the lowest prominent coastal vessel",
+          "cells": [
+            "bottom-left"
+          ],
+          "selection_rule": "target_center"
+        }
+      ]
+    },
+    "source": {
+      "record_id": "00002",
+      "record_file": "PAN/cprs_sharegpt.json",
+      "image": "PAN/images/0002.png",
+      "original_turn_count": 3,
+      "scope": "Illustrative grid-based showcase adaptation of source images; not an official training export or benchmark.",
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    }
+  },
+  {
+    "id": "NIR_00001",
+    "images": [
+      "images/nir_00001.png"
+    ],
+    "conversations": [
+      {
+        "role": "user",
+        "content": "The image is divided into a 3x3 grid: top-left, top-center, top-right, middle-left, middle-center, middle-right, bottom-left, bottom-center, bottom-right. Which grid cell contains the clearest dense warehouse cluster? Answer with one cell name. <image>"
+      },
+      {
+        "role": "assistant",
+        "content": "bottom-left."
+      },
+      {
+        "role": "user",
+        "content": "Are ships or boats clearly identifiable in the visible water area?"
+      },
+      {
+        "role": "assistant",
+        "content": "No clearly identifiable vessel is supported by the visible image; the main visible structures are the bridge and the onshore industrial area."
+      }
+    ],
+    "meta": {
+      "modality": "NIR",
+      "image_size": [
+        512,
+        512
+      ],
+      "task_tags": [
+        "visual question answering (VQA)",
+        "grid grounding",
+        "spatial relation reasoning",
+        "evidence judgment"
+      ],
+      "relations": [
+        {
+          "subject": "warehouse",
+          "predicate": "next_to",
+          "object": "warehouse"
+        }
+      ],
+      "grid": {
+        "rows": 3,
+        "columns": 3,
+        "cell_names": [
+          "top-left",
+          "top-center",
+          "top-right",
+          "middle-left",
+          "middle-center",
+          "middle-right",
+          "bottom-left",
+          "bottom-center",
+          "bottom-right"
+        ]
+      },
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "clearest dense warehouse cluster",
+          "cells": [
+            "bottom-left"
+          ],
+          "selection_rule": "clearest_region"
+        }
+      ]
+    },
+    "source": {
+      "record_id": "00001",
+      "record_file": "NIR/cprs_sharegpt.json",
+      "image": "NIR/images/0001.png",
+      "original_turn_count": 3,
+      "scope": "Illustrative grid-based showcase adaptation of source images; not an official training export or benchmark.",
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    }
+  },
+  {
+    "id": "NIR_00055",
+    "images": [
+      "images/nir_00055.png"
+    ],
+    "conversations": [
+      {
+        "role": "user",
+        "content": "The image is divided into a 3x3 grid: top-left, top-center, top-right, middle-left, middle-center, middle-right, bottom-left, bottom-center, bottom-right. Which grid cells visibly contain the large vessel near the lower-right edge? Select all supported cells. <image>"
+      },
+      {
+        "role": "assistant",
+        "content": "middle-right, bottom-right."
+      },
+      {
+        "role": "user",
+        "content": "Which grid cells visibly contain the main bright rectangular warehouse structures on the right?"
+      },
+      {
+        "role": "assistant",
+        "content": "top-right, middle-right."
+      }
+    ],
+    "meta": {
+      "modality": "NIR",
+      "image_size": [
+        512,
+        512
+      ],
+      "task_tags": [
+        "visual question answering (VQA)",
+        "grid grounding",
+        "spatial relation reasoning",
+        "evidence judgment"
+      ],
+      "relations": [
+        {
+          "subject": "ship",
+          "predicate": "docked_at",
+          "object": "pier"
+        },
+        {
+          "subject": "warehouse",
+          "predicate": "near",
+          "object": "pier"
+        },
+        {
+          "subject": "ship",
+          "predicate": "near",
+          "object": "warehouse"
+        }
+      ],
+      "grid": {
+        "rows": 3,
+        "columns": 3,
+        "cell_names": [
+          "top-left",
+          "top-center",
+          "top-right",
+          "middle-left",
+          "middle-center",
+          "middle-right",
+          "bottom-left",
+          "bottom-center",
+          "bottom-right"
+        ]
+      },
+      "grid_grounding": [
+        {
+          "turn": 1,
+          "target": "large vessel near the lower-right edge",
+          "cells": [
+            "middle-right",
+            "bottom-right"
+          ],
+          "selection_rule": "visible_extent"
+        },
+        {
+          "turn": 2,
+          "target": "main bright rectangular warehouse structures",
+          "cells": [
+            "top-right",
+            "middle-right"
+          ],
+          "selection_rule": "visible_extent"
+        }
+      ]
+    },
+    "source": {
+      "record_id": "00055",
+      "record_file": "NIR/cprs_sharegpt.json",
+      "image": "NIR/images/0055.png",
+      "original_turn_count": 3,
+      "scope": "Illustrative grid-based showcase adaptation of source images; not an official training export or benchmark.",
+      "adaptation": "Illustrative grid-based dialogue rewritten after visual inspection for this showcase; not verbatim source dialogue or an official benchmark annotation."
+    }
+  }
+]
