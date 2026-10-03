@@ -9,9 +9,9 @@
 </p>
 
 <p align="center">
-  <a href="https://z0ngl1ng.github.io/filling-before-advancing/">Project website</a>
-  &nbsp;|&nbsp;
   <a href="https://arxiv.org/abs/2607.22205"><img src="https://img.shields.io/badge/arXiv-2607.22205-b31b1b.svg?logo=arxiv" alt="arXiv" style="vertical-align: middle;"></a>
+  &nbsp;|&nbsp;
+  <a href="https://z0ngl1ng.github.io/filling-before-advancing/"><img src="https://img.shields.io/badge/Project-Website-39766b.svg" alt="Project website" style="vertical-align: middle;"></a>
   &nbsp;|&nbsp;
   <a href="README.md">English</a> | <a href="README_zh-CN.md">简体中文</a>
 </p>
