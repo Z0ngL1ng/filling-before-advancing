@@ -5,7 +5,7 @@
 ### Capability-Gap-Driven Post-Training for Scenario-Specialized Remote Sensing MLLMs
 
 <p align="center">
-  <a href="https://arxiv.org/search/cs?searchtype=author&query=Zong,+Y">Yuheng Zong</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Wang,+M">Minghua Wang</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Zhao,+X">Xin Zhao</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Zhan,+Z">Zhi-Hui Zhan</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Plaza,+A">Antonio Plaza</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Benediktsson,+J+A">Jon Atli Benediktsson</a>
+  <a href="https://arxiv.org/search/?searchtype=author&amp;query=%22Zong%2C+Yuheng%22" title="Search arXiv for Yuheng Zong">Yuheng Zong</a>, <a href="https://ai.nankai.edu.cn/info/1256/6068.htm" title="Minghua Wang — Nankai University profile">Minghua Wang</a>, <a href="https://robot.nankai.edu.cn/info/1018/1318.htm" title="Xin Zhao — Nankai University profile">Xin Zhao</a>, <a href="https://ai.nankai.edu.cn/info/1199/5673.htm" title="Zhi-Hui Zhan — Nankai University profile">Zhi-Hui Zhan</a>, <a href="https://sites.google.com/view/antonioplaza/inicio" title="Antonio Plaza — personal homepage">Antonio Plaza</a>, <a href="https://hi.is/starfsfolk/benedikt" title="Jon Atli Benediktsson — University of Iceland profile">Jon Atli Benediktsson</a>
 </p>
 
 <p align="center">

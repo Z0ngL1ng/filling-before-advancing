@@ -5,7 +5,7 @@
 ### 面向场景专用遥感多模态大语言模型的能力缺口驱动后训练
 
 <p align="center">
-  <a href="https://arxiv.org/search/cs?searchtype=author&query=Zong,+Y">Yuheng Zong</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Wang,+M">Minghua Wang</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Zhao,+X">Xin Zhao</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Zhan,+Z">Zhi-Hui Zhan</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Plaza,+A">Antonio Plaza</a>, <a href="https://arxiv.org/search/cs?searchtype=author&query=Benediktsson,+J+A">Jon Atli Benediktsson</a>
+  <a href="https://arxiv.org/search/?searchtype=author&amp;query=%22Zong%2C+Yuheng%22" title="检索 Yuheng Zong 的 arXiv 论文">Yuheng Zong</a>, <a href="https://ai.nankai.edu.cn/info/1256/6068.htm" title="王明华 — 南开大学教师主页">Minghua Wang</a>, <a href="https://robot.nankai.edu.cn/info/1018/1318.htm" title="赵新 — 南开大学教师主页">Xin Zhao</a>, <a href="https://ai.nankai.edu.cn/info/1199/5673.htm" title="詹志辉 — 南开大学教师主页">Zhi-Hui Zhan</a>, <a href="https://sites.google.com/view/antonioplaza/inicio" title="Antonio Plaza — 个人主页">Antonio Plaza</a>, <a href="https://hi.is/starfsfolk/benedikt" title="Jon Atli Benediktsson — 冰岛大学教师主页">Jon Atli Benediktsson</a>
 </p>
 
 <p align="center">
