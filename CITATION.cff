@@ -1,0 +1,38 @@
+cff-version: 1.2.0
+message: "Please cite the accompanying paper when using this work."
+title: "Filling Before Advancing: Capability-Gap-Driven Post-Training for Scenario-Specialized Remote Sensing MLLMs"
+authors:
+  - family-names: "Zong"
+    given-names: "Yuheng"
+  - family-names: "Wang"
+    given-names: "Minghua"
+  - family-names: "Zhao"
+    given-names: "Xin"
+  - family-names: "Zhan"
+    given-names: "Zhi-Hui"
+  - family-names: "Plaza"
+    given-names: "Antonio"
+  - family-names: "Benediktsson"
+    given-names: "Jon Atli"
+repository-code: "https://github.com/Z0ngL1ng/filling-before-advancing"
+url: "https://z0ngl1ng.github.io/filling-before-advancing/"
+preferred-citation:
+  type: article
+  title: "Filling Before Advancing: Capability-Gap-Driven Post-Training for Scenario-Specialized Remote Sensing MLLMs"
+  authors:
+    - family-names: "Zong"
+      given-names: "Yuheng"
+    - family-names: "Wang"
+      given-names: "Minghua"
+    - family-names: "Zhao"
+      given-names: "Xin"
+    - family-names: "Zhan"
+      given-names: "Zhi-Hui"
+    - family-names: "Plaza"
+      given-names: "Antonio"
+    - family-names: "Benediktsson"
+      given-names: "Jon Atli"
+  journal: arXiv
+  year: 2026
+  doi: "10.48550/arXiv.2607.22205"
+  url: "https://arxiv.org/abs/2607.22205"

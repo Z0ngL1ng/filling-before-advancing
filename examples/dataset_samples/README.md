@@ -1,4 +1,4 @@
-# LLaVA Three-Stage Dataset Samples
+# CPRS dataset samples
 
 This folder is a compact, GitHub-ready showcase rather than a training release.
 

@@ -5,6 +5,7 @@ let samples = [];
 let language = 'en';
 let activeSensor = 'rgb';
 let activeCase = 0;
+let showcaseUnavailable = false;
 const languageButton = document.getElementById('language');
 const tabs = Array.from(document.querySelectorAll('[data-sensor]'));
 const caseSelect = document.getElementById('sample-select');
@@ -18,6 +19,8 @@ function drawGrid(sample) {
   svg.toggleAttribute('hidden', !gridToggle.checked);
   const answerCells = new Set(sample.grid_grounding[0].cells);
   const step = 512 / 3;
+  const imageWidth = document.getElementById('sensor-image').getBoundingClientRect().width || 512;
+  const fontSize = Math.max(13, 11 * 512 / imageWidth);
   gridCells.forEach((cell, index) => {
     const x = (index % 3) * step;
     const y = Math.floor(index / 3) * step;
@@ -25,16 +28,18 @@ function drawGrid(sample) {
     const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
     Object.entries({x, y, width: step, height: step, fill: selected ? '#edaa86' : 'none', 'fill-opacity': 0.16, stroke: '#eceee5', 'stroke-opacity': 0.7, 'stroke-width': 1, 'vector-effect': 'non-scaling-stroke', 'data-cell': cell, 'data-answer': String(selected)}).forEach(([key, value]) => rect.setAttribute(key, value));
     svg.append(rect);
+    const text = language === 'en' ? cell : gridLabelsZh[index];
+    const labelWidth = Math.min(step - 8, text.length * fontSize * (language === 'en' ? 0.62 : 1) + 10);
     const background = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-    Object.entries({x: x + 4, y: y + 4, width: language === 'en' ? 119 : 43, height: 21, fill: '#202b2c', 'fill-opacity': 0.85}).forEach(([key, value]) => background.setAttribute(key, value));
+    Object.entries({x: x + 4, y: y + 4, width: labelWidth, height: fontSize + 8, fill: '#202b2c', 'fill-opacity': 0.85}).forEach(([key, value]) => background.setAttribute(key, value));
     svg.append(background);
     const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     label.setAttribute('x', x + 9);
-    label.setAttribute('y', y + 19);
+    label.setAttribute('y', y + fontSize + 5);
     label.setAttribute('fill', selected ? '#f4c4a3' : '#ecf1ec');
-    label.setAttribute('font-size', '13');
+    label.setAttribute('font-size', fontSize);
     label.setAttribute('font-family', 'sans-serif');
-    label.textContent = language === 'en' ? cell : gridLabelsZh[index];
+    label.textContent = text;
     svg.append(label);
   });
 }
@@ -103,11 +108,17 @@ function setLanguage(next) {
   languageButton.textContent = language === 'en' ? '中文' : 'EN';
   languageButton.setAttribute('aria-label', language === 'en' ? '切换为中文' : 'Switch to English');
   document.getElementById('copy-status').textContent = '';
+  document.getElementById('gallery-status').textContent = showcaseUnavailable ? (language === 'en' ? 'More cases could not load. The first example and source link remain available.' : '其他案例暂未加载，可先查看首个样例与源记录链接。') : '';
   renderSample();
   try { localStorage.setItem('fba-language', language); } catch (_) { /* The page also works when storage is unavailable. */ }
 }
 
-languageButton.addEventListener('click', () => setLanguage(language === 'en' ? 'zh' : 'en'));
+languageButton.addEventListener('click', () => {
+  setLanguage(language === 'en' ? 'zh' : 'en');
+  const url = new URL(window.location.href);
+  url.searchParams.set('lang', language);
+  window.history.replaceState(null, '', url);
+});
 tabs.forEach((tab, index) => {
   tab.addEventListener('click', () => { activeSensor = tab.dataset.sensor; activeCase = 0; renderSample(); });
   tab.addEventListener('keydown', event => {
@@ -132,6 +143,12 @@ caseSelect.addEventListener('change', () => {
 gridToggle.addEventListener('change', () => {
   document.getElementById('grid-overlay').toggleAttribute('hidden', !gridToggle.checked);
 });
+
+new ResizeObserver(() => {
+  const cases = samples.filter(sample => sample.modality === activeSensor);
+  const sample = cases[activeCase] || cases[0];
+  if (sample) drawGrid(sample);
+}).observe(document.getElementById('sensor-image'));
 
 document.getElementById('copy-citation').addEventListener('click', async () => {
   const status = document.getElementById('copy-status');
@@ -163,6 +180,8 @@ async function loadShowcase() {
     caseSelect.disabled = false;
     gridToggle.disabled = false;
   } catch (_) {
+    showcaseUnavailable = true;
+    tabs.filter(tab => tab.dataset.sensor !== 'rgb').forEach(tab => { tab.disabled = true; });
     document.getElementById('gallery-status').textContent = language === 'en' ? 'More cases could not load. The first example and source link remain available.' : '其他案例暂未加载，可先查看首个样例与源记录链接。';
   }
 }

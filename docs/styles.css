@@ -9,3 +9,4 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 .resource-placeholder{color:var(--muted);cursor:default}
+.sensor-tabs button:disabled{opacity:.5;cursor:default}

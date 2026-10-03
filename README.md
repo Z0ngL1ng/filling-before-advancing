@@ -246,14 +246,16 @@ Bridge-Conv is selected around target-related visual-language priors rather than
 
 ## Citation and license
 
-If you find this work useful, please cite:
+If you find this work useful, please cite the paper below. The repository also provides a [CITATION.cff](CITATION.cff) file for GitHub’s “Cite this repository” entry.
 
 ```bibtex
 @article{zong2026fba,
   title   = {Filling Before Advancing: Capability-Gap-Driven Post-Training for Scenario-Specialized Remote Sensing MLLMs},
   author  = {Zong, Yuheng and Wang, Minghua and Zhao, Xin and Zhan, Zhi-Hui and Plaza, Antonio and Benediktsson, Jon Atli},
   journal = {arXiv preprint arXiv:2607.22205},
-  year    = {2026}
+  year    = {2026},
+  doi     = {10.48550/arXiv.2607.22205},
+  url     = {https://arxiv.org/abs/2607.22205}
 }
 ```
 

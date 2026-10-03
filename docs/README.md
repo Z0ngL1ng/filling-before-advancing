@@ -14,6 +14,8 @@ python -m http.server 8765 --directory docs
 
 Open <http://localhost:8765/>. `?lang=en` and `?lang=zh` set the entry language; the language button preserves the visitor's preference when browser storage is available. The English content and links also work without JavaScript.
 
+Switching language updates the `lang` URL parameter while preserving the current section, so refreshes and shared links retain the selected language. Grid labels resize with the image to remain at least 11 CSS pixels on small screens. A direct sample-gallery entry is available beside the paper and repository links. Social cards use an existing published RGB sample. Citation metadata is maintained in the root `CITATION.cff` and the BibTeX blocks, including the paper's arXiv DOI.
+
 ## Content and assets
 
 Research claims, author order, scores, citation, and release status follow the repository README. Update the website when those facts change. The interactive gallery shows eight curated CPRS source-data cases from `examples/dataset_samples/cprs_source_showcase`, with two cases per sensor. The 8,300-record source snapshot is explicitly distinguished from the approximately 810K stage-wise supervision corpus. Existing stage-specific and benchmark showcases remain available separately.
