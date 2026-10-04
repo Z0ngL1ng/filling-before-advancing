@@ -93,7 +93,7 @@ Resources that cannot be redistributed will be represented by source manifests a
 | **T3 (183)** | Spatial-relation reasoning |
 | **T4 (164)** | Multi-cell grid grounding |
 | **T5 (171)** | Sensor-aware observability |
-| **T6 (123)** | Evidence judgment and uncertainty |
+| **T6 (123)** | Evidence judgment |
 | **T7 (79)** | Evidence-grounded report generation |
 | **T8 (181)** | Non-harbor and near-domain rejection |
 
@@ -165,19 +165,21 @@ Relative to the corresponding official or base checkpoint, FBA raises the Harbor
 <details>
 <summary><strong>Direct-SFT → FBA track-level breakdown</strong></summary>
 
-| HarborEval component | LLaVA-v1.5 | Qwen3-VL |
-|---|---:|---:|
-| Overall | 57.95 → **70.29** | 81.09 → **83.37** |
-| Object | 75.07 → 73.47 | 87.99 → **92.42** |
-| Functional zone | 66.67 → **67.22** | 78.33 → **81.11** |
-| Modality | 50.88 → **80.12** | 81.29 → **82.46** |
-| Spatial relation | 60.67 → **69.10** | 81.46 → **83.15** |
-| Grid grounding | 48.37 → 43.82 | 66.06 → **68.61** |
-| Hard negative | 52.03 → **69.11** | 78.05 → **79.67** |
-| Rejection | 37.28 → **85.80** | 95.27 → **98.22** |
-| Report generation | 72.60 → **73.70** | 80.23 → **81.32** |
+| Track | HarborEval component | LLaVA-v1.5 | Qwen3-VL |
+|---|---|---:|---:|
+| — | Overall | 57.95 → **70.29** | 81.09 → **83.37** |
+| T1 | Object/scene VQA | 75.07 → 73.47 | 87.99 → **92.42** |
+| T2 | Functional-zone interpretation | 66.67 → **67.22** | 78.33 → **81.11** |
+| T3 | Spatial-relation reasoning | 60.67 → **69.10** | 81.46 → **83.15** |
+| T4 | Multi-cell grid grounding | 48.37 → 43.82 | 66.06 → **68.61** |
+| T5 | Sensor-aware observability | 50.88 → **80.12** | 81.29 → **82.46** |
+| T6 | Evidence judgment | 52.03 → **69.11** | 78.05 → **79.67** |
+| T7 | Evidence-grounded report generation | 72.60 → **73.70** | 80.23 → **81.32** |
+| T8 | Non-harbor and near-domain rejection | 37.28 → **85.80** | 95.27 → **98.22** |
 
-For LLaVA-v1.5, the overall gain is driven especially by modality understanding, hard-negative handling, rejection, and reporting, while object recognition and grid grounding remain slightly lower than Direct-SFT. Qwen3-VL improves across all eight diagnostic components.
+T5 tests what a sensor can support observing, not sensor classification. T6 tests whether visual evidence supports a claim, including uncertainty.
+
+For LLaVA-v1.5, the overall gain is driven especially by T5 sensor-aware observability, T6 evidence judgment, T8 rejection, and T7 reporting, while object recognition and grid grounding remain slightly lower than Direct-SFT. Qwen3-VL improves across all eight diagnostic components.
 
 </details>
 
@@ -230,18 +232,21 @@ Bridge-Conv is selected around target-related visual-language priors rather than
 
 ## Release status
 
-| Artifact | Status |
-|---|---|
-| Paper | [arXiv:2607.22205](https://arxiv.org/abs/2607.22205) |
-| Project website | [Interactive bilingual research page](https://z0ngl1ng.github.io/filling-before-advancing/) |
-| Hugging Face models | [FBA project page](https://huggingface.co/zongling/FBA) available; weights will be released progressively after paper acceptance |
-| Hugging Face datasets | [CPRS project page](https://huggingface.co/datasets/zongling/CPRS) available; full data will be released progressively after paper acceptance |
-| Code | Training and evaluation release in preparation |
-| Weights | Release preparation in progress |
-| CPRS | Release scope and source licenses under review |
-| HarborEval | Public/private evaluation packaging in preparation |
+<!-- release-status:start -->
+**Updated 2026-10-04.** The website and HF preview pages are online; resource files are a separate release. Both HF repositories currently contain only README.md and .gitattributes.
 
-**Datasets, benchmarks, and trained weights will be released progressively after paper acceptance.**
+| Artifact | File availability | Public version |
+| --- | --- | --- |
+| Training & evaluation code | Not released · package in preparation | — |
+| FBA / LLaVA-v1.5-7B weights | Not released · checkpoint package in preparation | — |
+| FBA / Qwen3-VL-8B weights | Not released · checkpoint package in preparation | — |
+| CPRS full dataset | Not released · source permissions under review | — |
+| HarborEval evaluation package | Not released · public evaluation package in preparation | — |
+
+**— means no public resource version yet.** Base-model names are not FBA release versions. Releases are planned progressively after paper acceptance. Public examples remain illustrative; HarborEval reference answers and scoring notes are currently private.
+
+[Shared checklist](https://github.com/Z0ngL1ng/filling-before-advancing/blob/main/RELEASE_STATUS.md) · [License scope](https://github.com/Z0ngL1ng/filling-before-advancing/blob/main/LICENSE_SCOPE.md)
+<!-- release-status:end -->
 
 ## Citation and license
 
@@ -259,3 +264,5 @@ If you find this work useful, please cite the paper below. The repository also p
 ```
 
 The repository will document the licenses and usage conditions of original code, third-party models, source datasets, figures, evaluation records, and released weights. Resources that cannot be redistributed will be represented through manifests and reproducible preparation scripts where permitted.
+
+See [license scope](LICENSE_SCOPE.md) for separate conditions on code, website content, each model variant, source imagery, annotations, and evaluation records. No blanket project license is currently declared.

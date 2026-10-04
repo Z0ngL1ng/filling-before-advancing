@@ -1,0 +1,73 @@
+{
+  "updated": "2026-10-04",
+  "items": [
+    {
+      "id": "code",
+      "name": {
+        "en": "Training & evaluation code",
+        "zh": "训练与评测代码"
+      },
+      "status": {
+        "en": "Not released · package in preparation",
+        "zh": "尚未发布 · 公开包准备中"
+      },
+      "public_version": null
+    },
+    {
+      "id": "llava",
+      "name": {
+        "en": "FBA / LLaVA-v1.5-7B weights",
+        "zh": "FBA / LLaVA-v1.5-7B 权重"
+      },
+      "status": {
+        "en": "Not released · checkpoint package in preparation",
+        "zh": "尚未发布 · 权重包准备中"
+      },
+      "public_version": null
+    },
+    {
+      "id": "qwen",
+      "name": {
+        "en": "FBA / Qwen3-VL-8B weights",
+        "zh": "FBA / Qwen3-VL-8B 权重"
+      },
+      "status": {
+        "en": "Not released · checkpoint package in preparation",
+        "zh": "尚未发布 · 权重包准备中"
+      },
+      "public_version": null
+    },
+    {
+      "id": "cprs",
+      "name": {
+        "en": "CPRS full dataset",
+        "zh": "CPRS 完整数据集"
+      },
+      "status": {
+        "en": "Not released · source permissions under review",
+        "zh": "尚未发布 · 来源许可审核中"
+      },
+      "public_version": null
+    },
+    {
+      "id": "harboreval",
+      "name": {
+        "en": "HarborEval evaluation package",
+        "zh": "HarborEval 评测包"
+      },
+      "status": {
+        "en": "Not released · public evaluation package in preparation",
+        "zh": "尚未发布 · 公开评测包准备中"
+      },
+      "public_version": null
+    }
+  ],
+  "availability": {
+    "en": "As of {updated}, the paper, project website, documentation, and illustrative samples are publicly accessible. The Hugging Face repositories contain preview cards only, with no model weights or full dataset files. Training/evaluation code, FBA checkpoints for LLaVA-v1.5-7B and Qwen3-VL-8B, CPRS, and the HarborEval evaluation package have not been released. They are planned for progressive release after paper acceptance, subject to the applicable artifact and source-material terms. HarborEval reference answers and scoring notes currently remain private.",
+    "zh": "截至 {updated}，论文、项目网页、文档与展示样例已可公开访问。Hugging Face 仓库目前仅提供预览介绍卡片，没有模型权重或完整数据文件。训练评测代码、LLaVA-v1.5-7B 与 Qwen3-VL-8B 的 FBA 权重、CPRS 和 HarborEval 评测包尚未发布，计划在论文录用后按各项资源与来源材料的许可条件陆续发布。HarborEval 参考答案与评分说明目前仍保持私有。"
+  },
+  "page_note": {
+    "en": "The website and HF preview pages are online; resource files are a separate release. Both HF repositories currently contain only README.md and .gitattributes.",
+    "zh": "网页与 HF 预览介绍页已上线，资源文件需另行发布。两个 HF 仓库目前都只有 README.md 和 .gitattributes。"
+  }
+}
