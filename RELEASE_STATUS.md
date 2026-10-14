@@ -42,4 +42,4 @@ As of 2026-10-04, the paper, project website, documentation, and illustrative sa
 
 截至 2026-10-04，论文、项目网页、文档与展示样例已可公开访问。Hugging Face 仓库目前仅提供预览介绍卡片，没有模型权重或完整数据文件。训练评测代码、LLaVA-v1.5-7B 与 Qwen3-VL-8B 的 FBA 权重、CPRS 和 HarborEval 评测包尚未发布，计划在论文录用后按各项资源与来源材料的许可条件陆续发布。HarborEval 参考答案与评分说明目前仍保持私有。
 
-Update `docs/data/release-status.json` and run `python scripts/sync_release_status.py` to refresh this file, both READMEs, the website, and the HF card sources. Publish the updated card sources as the corresponding HF `README.md` files.
+Update `docs/data/release-status.json` and run `python scripts/sync_release_status.py` to refresh this file, both READMEs, and the HF card sources. Publish the updated card sources as the corresponding HF `README.md` files.

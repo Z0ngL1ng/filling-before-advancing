@@ -36,10 +36,5 @@
 .track-detail table{min-width:760px}
 .track-detail .track-name{text-align:left}
 .track-detail .result-note{margin:16px 0 0}
-.release-status{margin:29px 0 36px}
-.release-status h3{font-size:26px;line-height:1.4;margin-bottom:15px}
-.release-status-note{font-size:13px;color:var(--muted);margin:16px 0}
-.release-status table{min-width:740px}
-.release-status th:nth-child(2),.release-status td:nth-child(2){text-align:left}
-.release-status-links{margin-bottom:0}
-@media(max-width:680px){.release-status table{min-width:0;table-layout:fixed}.release-status th,.release-status td{white-space:normal;overflow-wrap:anywhere;vertical-align:top}.release-status th:first-child{width:36%}.release-status th:nth-child(2){width:44%}.release-status th:nth-child(3){width:20%}}
+
+.resources .citation{margin-top:32px}
