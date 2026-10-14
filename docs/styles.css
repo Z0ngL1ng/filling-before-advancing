@@ -23,6 +23,14 @@
 @media(max-width:680px){.gain-context{margin-top:28px;padding-left:17px}.gain-context h3{font-size:23px}.next-work{margin-top:28px;padding:21px}.next-work h3{font-size:28px}.next-work-topics{grid-template-columns:1fr;gap:20px}.next-work-topics dt{margin-bottom:7px}}
 
 .track-detail{margin:23px 0;border-top:1px solid var(--line);padding-top:16px}
+.urban-validation{margin-top:36px;padding:26px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);scroll-margin-top:30px}
+.urban-validation h3{font-size:25px;line-height:1.4;margin:12px 0 16px}
+.urban-validation p{font-size:14px;color:var(--muted);max-width:960px;margin-bottom:14px}
+.urban-validation summary{font-size:14px;color:var(--deep-teal);cursor:pointer}
+.urban-validation .table-scroll{max-width:700px;margin-top:18px}
+.urban-validation td:last-child{color:var(--deep-teal)}
+.urban-validation .urban-source{font-size:12px;margin:15px 0 12px}
+@media(max-width:680px){.urban-validation{margin-top:28px;padding:23px 0}.urban-validation h3{font-size:23px}.urban-validation table{min-width:330px}}
 .track-detail summary{font-size:14px;color:var(--deep-teal);cursor:pointer}
 .track-detail .table-scroll{margin-top:17px}
 .track-detail table{min-width:760px}

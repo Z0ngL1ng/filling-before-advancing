@@ -53,7 +53,7 @@ FBA organizes supervision by capability dependency rather than mixing all availa
 | Stage | Supervision | Role | Scale |
 |---|---|---|---:|
 | **S1** | **RS-Anchor** | Overhead-view visual-language alignment and broad RS semantics | 569,853 image-caption pairs |
-| **S2** | **Bridge-Conv** | Shared RS priors across target and bridging scenes and multiple sensors | 187,296 SFT records |
+| **S2** | **Bridging-Conv** | Shared RS priors across target and bridging scenes and multiple sensors | 187,296 SFT records |
 | **S3** | **Scenario-EG** | Evidence-grounded perception, spatial reasoning, robustness, and generation | 53,000 SFT records |
 
 <p align="center">
@@ -72,14 +72,14 @@ CPRS and HarborEval are maintained as separate, audited resources; raw training 
   <a href="assets/cprs_progressive_data_curation.png"><img src="assets/cprs_progressive_data_curation.png" alt="Progressive data curation of the three-layer CPRS dataset" width="100%"></a>
 </p>
 
-The CPRS design combines a stage-wise transition from **RS-Anchor** to **Bridge-Conv** and **Scenario-EG**, increasingly harbor-focused supervision, broad coastal coverage, and image-level curation followed by staged multi-teacher SFT synthesis and manual inspection.
+The CPRS design combines a stage-wise transition from **RS-Anchor** to **Bridging-Conv** and **Scenario-EG**, increasingly harbor-focused supervision, broad coastal coverage, and image-level curation followed by staged multi-teacher SFT synthesis and manual inspection.
 
 **CPRS construction and audit.** Heterogeneous sources are normalized into image-text or ShareGPT-style records. Image-text data retain one caption per unique image, while instruction conversations are restricted to visible evidence. For SAR, NIR, and PAN, wording is further constrained by sensor observability. Staged multi-teacher distillation assigns fixed roles to metadata grounding, instruction synthesis, and evidence verification; candidates are retained, rewritten, or discarded. Source metadata, teacher notes, verifier rationales, construction tags, and retry outcomes are retained for audit but removed from student-model exports, together with malformed records, duplicate references, benchmark traces, and modality-incompatible claims.
 
 ### CPRS curation at a glance
 
 - **RS-Anchor:** 3,135,250 source samples → 569,853 unique image-caption pairs from eight public datasets, after caption cleaning, image-level deduplication, scene classification, diversity-aware sampling, and visible-semantic filtering.
-- **Bridge-Conv:** 187,296 SFT records: 99,088 RGB, 29,984 SAR, 28,475 NIR, and 29,749 PAN. Its RGB pool includes 59,453 water/coast/port/dock/ship-related records. Construction applies modality-aware rewriting plus staged evidence grounding, instruction synthesis, and verify/rewrite/drop decisions.
+- **Bridging-Conv:** 187,296 SFT records: 99,088 RGB, 29,984 SAR, 28,475 NIR, and 29,749 PAN. Its RGB pool includes 59,453 water/coast/port/dock/ship-related records. Construction applies modality-aware rewriting plus staged evidence grounding, instruction synthesis, and verify/rewrite/drop decisions.
 - **Scenario-EG:** 53,000 train-only SFT records over 8,703 RGB, SAR, PAN, and NIR images, covering presence validation, relation reasoning, grid grounding, functional-zone interpretation, controlled negatives, response replay, and benchmark-trace removal.
 
 Resources that cannot be redistributed will be represented by source manifests and reconstruction scripts where their licenses permit.
@@ -162,6 +162,8 @@ Vessel or water keywords alone do not justify a harbor label. Positive records m
 
 Relative to the corresponding official or base checkpoint, FBA raises the HarborEval score from **46.22 to 70.29** on LLaVA-v1.5 and from **70.37 to 83.37** on Qwen3-VL. Under controlled post-training comparisons, FBA also outperforms Direct-SFT and the strongest Collapsed-SFT in both backbone families.
 
+The routes share the Scenario-EG supervision pool for harbor specialization; FBA additionally uses anchoring and bridging supervision. Initialization, total data exposure, and training budget differ across routes (Section 4.1).
+
 <details>
 <summary><strong>Direct-SFT → FBA track-level breakdown</strong></summary>
 
@@ -215,16 +217,55 @@ The trajectory is role-specific rather than uniformly monotonic: S1 establishes 
 | Role | Replacement → intended supervision | RS-VL | MS | HE |
 |---|---|---:|---:|---:|
 | **D1 anchoring** | Generic image-text → RS-Anchor | 76.42 → **89.16** | 64.49 → **68.04** | 60.36 → **70.29** |
-| **D2 bridging** | Non-bridging → Bridge-Conv | 84.36 → **89.16** | 66.90 → **68.04** | 57.11 → **70.29** |
+| **D2 bridging** | Non-bridging → Bridging-Conv | 84.36 → **89.16** | 66.90 → **68.04** | 57.11 → **70.29** |
 | **D3 specialization** | Non-EG → Scenario-EG | 88.97 → **89.16** | 67.78 → **68.04** | 50.12 → **70.29** |
 
-Replacing each intended supervision layer weakens the capability it is designed to supply. RS-Anchor contributes most clearly to RS-VL anchoring, Bridge-Conv improves multi-source and downstream adaptation, and Scenario-EG produces the largest HarborEval recovery.
+Replacing each intended supervision layer weakens the capability it is designed to supply. RS-Anchor contributes most clearly to RS-VL anchoring, Bridging-Conv improves multi-source and downstream adaptation, and Scenario-EG produces the largest HarborEval recovery.
 
 All scores use a 0–100 scale. Evaluation inputs, semantic prompts, decoding policies, answer normalization, and scoring rules are held consistent within each controlled comparison.
 
+### 5. Supplementary validation: urban adaptation
+
+The latest manuscript adds a **lightweight urban extension** with **Qwen3-VL-2B-Instruct**, complementing the main harbor experiments (Section 4.6, Tables 9–11; manuscript update: 14 October 2026). Evaluation uses held-out subsets of EarthVQA Urban Val, VRSBench-VQA, and RSVQA-HR, with target sizes of **600 / 300 / 240 questions**, respectively.
+
+| Evaluation subset | Direct-SFT | FBA |
+|---|---:|---:|
+| EarthVQA Urban | 63.50 | **66.67** |
+| VRSBench-VQA | 63.33 | **67.00** |
+| RSVQA-HR | 69.17 | **78.33** |
+
+FBA leads the tested routes on all three subsets. The stage-order comparison also favors **S1 → S2 → S3**, supporting anchoring and bridging before final specialization in this urban setting.
+
+<details>
+<summary>Supplementary setup and route/order comparisons</summary>
+
+The three supervision pools contain **80,000 / 10,974 / 6,256 records** for RS-Anchor, Bridging-Conv, and Scenario-EG. Their urban proportions are **12.50% / 63.67% / 92.81%**. Bridging reuses urban and related scenes from the existing Stage 2 pool; final tuning uses urban task-matched supervision. Evaluation samples are separate from the training pools.
+
+**Training routes (Table 10).** B0 denotes Qwen3-VL-2B-Instruct; C2,3 combines bridging and scenario supervision in one phase.
+
+| Route | EarthVQA Urban | VRSBench-VQA | RSVQA-HR |
+|---|---:|---:|---:|
+| B0 | 36.83 | 66.00 | 72.92 |
+| Direct-SFT | 63.50 | 63.33 | 69.17 |
+| B0 → C2,3 | 62.50 | 63.67 | 66.67 |
+| B0 → S1 → C2,3 | 64.83 | 60.00 | 70.00 |
+| **FBA: B0 → S1 → S2 → S3** | **66.67** | **67.00** | **78.33** |
+
+**Stage order (Table 11).**
+
+| Sequence | EarthVQA Urban | VRSBench-VQA | RSVQA-HR |
+|---|---:|---:|---:|
+| S2 → S1 → S3 | 61.67 | 51.67 | 48.33 |
+| S1 → S3 → S2 | 60.83 | 62.67 | 73.75 |
+| **S1 → S2 → S3** | **66.67** | **67.00** | **78.33** |
+
+This experiment provides supplementary evidence from one additional scenario and one smaller backbone. The two-backbone harbor study remains the main evaluation.
+
+</details>
+
 ## Bridge-domain analysis
 
-Bridge-Conv is selected around target-related visual-language priors rather than treating all non-target imagery as equally useful. In the shared embedding space, its centroid reaches **0.92** cosine similarity with the harbor centroid, compared with **0.73** for general RS imagery and **0.54** for natural imagery. Bridging samples form **70.1%** of the local non-harbor neighbors around harbor queries.
+Bridging-Conv is selected around target-related visual-language priors rather than treating all non-target imagery as equally useful. In the shared embedding space, its centroid reaches **0.92** cosine similarity with the harbor centroid, compared with **0.73** for general RS imagery and **0.54** for natural imagery. Bridging samples form **70.1%** of the local non-harbor neighbors around harbor queries.
 
 <p align="center">
   <img src="assets/bridging_transfer.png" alt="Representation proximity between harbor and bridging domains" width="78%">
