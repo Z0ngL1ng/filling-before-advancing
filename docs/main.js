@@ -5,6 +5,7 @@ let samples = [];
 let language = 'en';
 let activeSensor = 'rgb';
 let activeCase = 0;
+let activeTurn = 0;
 let showcaseUnavailable = false;
 const languageButton = document.getElementById('language');
 const tabs = Array.from(document.querySelectorAll('[data-sensor]'));
@@ -13,11 +14,12 @@ const gridToggle = document.getElementById('show-grid');
 const gridCells = ['top-left', 'top-center', 'top-right', 'middle-left', 'middle-center', 'middle-right', 'bottom-left', 'bottom-center', 'bottom-right'];
 const gridLabelsZh = ['左上', '上中', '右上', '左中', '中央', '右中', '左下', '下中', '右下'];
 
-function drawGrid(sample) {
+function drawGrid(turn) {
   const svg = document.getElementById('grid-overlay');
   svg.replaceChildren();
-  svg.toggleAttribute('hidden', !gridToggle.checked);
-  const answerCells = new Set(sample.grid_grounding[0].cells);
+  svg.toggleAttribute('hidden', !turn.cells || !gridToggle.checked);
+  if (!turn.cells) return;
+  const answerCells = new Set(turn.cells);
   const step = 512 / 3;
   const imageWidth = document.getElementById('sensor-image').getBoundingClientRect().width || 512;
   const fontSize = Math.max(13, 11 * 512 / imageWidth);
@@ -44,12 +46,45 @@ function drawGrid(sample) {
   });
 }
 
+function renderQuestion(sample) {
+  const index = language === 'en' ? 0 : 1;
+  const turn = sample.turns[activeTurn] || sample.turns[0];
+  const questions = document.getElementById('question-switch');
+  questions.replaceChildren();
+  sample.turns.forEach((item, turnIndex) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = `${turnIndex + 1} / ${item.task[index]}`;
+    button.setAttribute('aria-pressed', String(turnIndex === activeTurn));
+    button.setAttribute('aria-controls', 'answer-panel');
+    button.addEventListener('click', () => {
+      activeTurn = turnIndex;
+      renderQuestion(sample);
+      questions.children[turnIndex].focus();
+    });
+    questions.append(button);
+  });
+  document.getElementById('sensor-task').textContent = turn.task[index];
+  document.getElementById('sensor-question').textContent = turn.question[index];
+  document.getElementById('sensor-answer').textContent = turn.answer[index];
+  const cues = document.getElementById('sample-cues');
+  cues.replaceChildren();
+  turn.cues.forEach(cue => {
+    const item = document.createElement('li');
+    item.textContent = cue[index];
+    cues.append(item);
+  });
+  document.getElementById('grid-control').hidden = !turn.cells;
+  document.getElementById('grid-note').hidden = !turn.cells;
+  gridToggle.disabled = !turn.cells;
+  drawGrid(turn);
+}
+
 function renderSample() {
   const cases = samples.filter(sample => sample.modality === activeSensor);
   if (!cases.length) return;
   const sample = cases[activeCase] || cases[0];
   const index = language === 'en' ? 0 : 1;
-  const firstTurn = sample.turns[0];
   caseSelect.replaceChildren();
   cases.forEach((item, optionIndex) => {
     const option = document.createElement('option');
@@ -63,36 +98,10 @@ function renderSample() {
   image.alt = `${activeSensor.toUpperCase()} · ${sample.title[index]}`;
   document.getElementById('full-image').href = image.src;
   document.getElementById('sensor-badge').textContent = `${activeSensor.toUpperCase()} / CPRS · ${sample.id.split('_')[1]}`;
-  document.getElementById('sensor-task').textContent = language === 'en' ? 'GRID GROUNDING / ILLUSTRATIVE DIALOGUE' : '网格定位 / 展示问答';
-  document.getElementById('sensor-question').textContent = firstTurn.question[index];
-  document.getElementById('sensor-answer').textContent = firstTurn.answer[index];
   document.getElementById('sample-why').textContent = sample.why[index];
-  document.getElementById('sensor-source').href = base + sample.source;
+  document.getElementById('sensor-source').href = base + sample.source_image;
   document.getElementById('sensor-panel').setAttribute('aria-labelledby', `tab-${activeSensor}`);
-  const relations = document.getElementById('sample-relations');
-  relations.replaceChildren();
-  sample.relations.forEach(relation => {
-    const item = document.createElement('span');
-    item.textContent = `${relation.subject} → ${relation.predicate} → ${relation.object}`;
-    relations.append(item);
-  });
-  document.getElementById('dialogue-summary').textContent = language === 'en' ? `View selected dialogue (${sample.turns.length} turns)` : `查看精选对话（${sample.turns.length} 轮）`;
-  const dialogue = document.getElementById('dialogue-turns');
-  dialogue.replaceChildren();
-  sample.turns.forEach((turn, turnIndex) => {
-    const article = document.createElement('article');
-    const label = document.createElement('span');
-    label.className = 'tiny';
-    label.textContent = language === 'en' ? `TURN ${turnIndex + 1}` : `第 ${turnIndex + 1} 轮`;
-    const question = document.createElement('p');
-    question.className = 'dialogue-question';
-    question.textContent = turn.question[index];
-    const answer = document.createElement('p');
-    answer.textContent = turn.answer[index];
-    article.append(label, question, answer);
-    dialogue.append(article);
-  });
-  drawGrid(sample);
+  renderQuestion(sample);
   tabs.forEach(tab => {
     const selected = tab.dataset.sensor === activeSensor;
     tab.setAttribute('aria-selected', String(selected));
@@ -108,7 +117,7 @@ function setLanguage(next) {
   languageButton.textContent = language === 'en' ? '中文' : 'EN';
   languageButton.setAttribute('aria-label', language === 'en' ? '切换为中文' : 'Switch to English');
   document.getElementById('copy-status').textContent = '';
-  document.getElementById('gallery-status').textContent = showcaseUnavailable ? (language === 'en' ? 'More cases could not load. The first example and source link remain available.' : '其他案例暂未加载，可先查看首个样例与源记录链接。') : '';
+  document.getElementById('gallery-status').textContent = showcaseUnavailable ? (language === 'en' ? 'More cases could not load. The first example and image source remain available.' : '其他案例暂未加载，可先查看首个样例与图像来源。') : '';
   renderSample();
   try { localStorage.setItem('fba-language', language); } catch (_) { /* The page also works when storage is unavailable. */ }
 }
@@ -120,7 +129,7 @@ languageButton.addEventListener('click', () => {
   window.history.replaceState(null, '', url);
 });
 tabs.forEach((tab, index) => {
-  tab.addEventListener('click', () => { activeSensor = tab.dataset.sensor; activeCase = 0; renderSample(); });
+  tab.addEventListener('click', () => { activeSensor = tab.dataset.sensor; activeCase = 0; activeTurn = 0; renderSample(); });
   tab.addEventListener('keydown', event => {
     let next;
     if (event.key === 'ArrowRight') next = (index + 1) % tabs.length;
@@ -131,6 +140,7 @@ tabs.forEach((tab, index) => {
     event.preventDefault();
     activeSensor = tabs[next].dataset.sensor;
     activeCase = 0;
+    activeTurn = 0;
     renderSample();
     tabs[next].focus();
   });
@@ -138,6 +148,7 @@ tabs.forEach((tab, index) => {
 
 caseSelect.addEventListener('change', () => {
   activeCase = Number(caseSelect.value);
+  activeTurn = 0;
   renderSample();
 });
 gridToggle.addEventListener('change', () => {
@@ -147,7 +158,7 @@ gridToggle.addEventListener('change', () => {
 new ResizeObserver(() => {
   const cases = samples.filter(sample => sample.modality === activeSensor);
   const sample = cases[activeCase] || cases[0];
-  if (sample) drawGrid(sample);
+  if (sample) drawGrid(sample.turns[activeTurn] || sample.turns[0]);
 }).observe(document.getElementById('sensor-image'));
 
 document.getElementById('copy-citation').addEventListener('click', async () => {
@@ -178,11 +189,10 @@ async function loadShowcase() {
     samples = (await response.json()).samples;
     renderSample();
     caseSelect.disabled = false;
-    gridToggle.disabled = false;
   } catch (_) {
     showcaseUnavailable = true;
     tabs.filter(tab => tab.dataset.sensor !== 'rgb').forEach(tab => { tab.disabled = true; });
-    document.getElementById('gallery-status').textContent = language === 'en' ? 'More cases could not load. The first example and source link remain available.' : '其他案例暂未加载，可先查看首个样例与源记录链接。';
+    document.getElementById('gallery-status').textContent = language === 'en' ? 'More cases could not load. The first example and image source remain available.' : '其他案例暂未加载，可先查看首个样例与图像来源。';
   }
 }
 loadShowcase();

@@ -38,3 +38,14 @@
 .track-detail .result-note{margin:16px 0 0}
 
 .resources .citation{margin-top:32px}
+.sample-why{margin-top:22px}
+.grid-toggle[hidden],.grid-note[hidden]{display:none}
+.question-switch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:0 0 23px}
+.question-switch:empty{display:none}
+.question-switch button{min-height:44px;padding:9px 11px;border:1px solid #ffffff38;border-radius:2px;background:transparent;color:#d3ddda;text-align:left;font:11px/1.6 var(--sans);overflow-wrap:anywhere}
+.question-switch button:hover{border-color:var(--teal)}
+.question-switch button[aria-pressed="true"]{border-color:var(--teal);background:#394c4b;color:#f3f1eb}
+.visible-cues{border-top:1px solid #ffffff25;margin:20px 0 19px;padding-top:16px}
+#sample-cues{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:12px 0 0}
+#sample-cues li{font-size:11px;line-height:1.6;padding:5px 9px;color:#d3ddda;background:#ffffff08;border:1px solid #ffffff24;border-radius:2px}
+@media(max-width:680px){.question-switch{gap:7px}.question-switch button{font-size:11px;padding:8px}.sample-why{margin-top:18px}}

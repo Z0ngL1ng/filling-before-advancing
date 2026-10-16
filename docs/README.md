@@ -14,7 +14,7 @@ python -m http.server 8765 --directory docs
 
 Open <http://localhost:8765/>. `?lang=en` and `?lang=zh` set the entry language; the language button preserves the visitor's preference when browser storage is available. The English content and links also work without JavaScript.
 
-Switching language updates the `lang` URL parameter while preserving the current section, so refreshes and shared links retain the selected language. Grid labels resize with the image to remain at least 11 CSS pixels on small screens. A direct sample-gallery entry is available beside the paper and repository links. Social cards use an existing published RGB sample. Citation metadata is maintained in the root `CITATION.cff` and the BibTeX blocks, including the paper's arXiv DOI.
+Switching language updates the `lang` URL parameter while preserving the current section, so refreshes and shared links retain the selected language. A direct sample-gallery entry is available beside the paper and repository links. Social cards use an existing published RGB sample. Citation metadata is maintained in the root `CITATION.cff` and the BibTeX blocks, including the paper's arXiv DOI.
 
 ## Content and assets
 
@@ -22,12 +22,12 @@ Research claims, author order, scores, citation, and release status follow the r
 
 Hugging Face entries link to the [FBA model project page](https://huggingface.co/zongling/FBA) and [CPRS dataset project page](https://huggingface.co/datasets/zongling/CPRS). Their pages introduce the research; weights and full data will be released progressively after paper acceptance. Keep these links and release-status wording consistent across the website and both repository READMEs.
 
-- `data/cprs-showcase.json`: grid convention, adapted English dialogue, Chinese translations, grid answer cells, and object relations for the eight cases.
+- `data/cprs-showcase.json`: website-authored bilingual questions and reference answers, task names, visible clues, source-image links, and optional answer cells for the localization question.
 - `assets/rgb_*.png`, `assets/sar_*.png`, `assets/pan_*.png`, `assets/nir_*.png`: unchanged copies of the corresponding curated source showcase images.
 - `assets/fba_stages.png`: the existing `assets/fba_stages.png` research figure.
 
-The gallery lets visitors select a sensor and case, view adapted multi-turn dialogue and object relations, overlay a 3 × 3 grid, and open the original image. Names follow the project's existing top/middle/bottom and left/center/right convention. Colored cells correspond to the first grid answer; questions distinguish a target's extent, center, or clearest visible region. Multi-cell answers are supported.
+The gallery lets visitors select a sensor and image, then switch between two questions. The sixteen questions cover scene interpretation, spatial relations, sensor observability, evidence judgment, uncertainty, rejection, grounded description/reporting, and grid grounding. Each answer is accompanied by concise visible clues. Only the first PAN case's localization question uses a 3 × 3 overlay; its second question and all other cases show the image without a grid. The grid toggle is only displayed when relevant, and its labels remain at least 11 CSS pixels on small screens.
 
-The questions and answers were rewritten after visual inspection for this illustrative showcase. They are not verbatim source dialogue or official benchmark annotations. Chinese text translates the adapted English dialogue. Image pixels and source files are unchanged. The linked sample JSON records the source and the adaptation and uses grid names for spatial answers.
+The questions and reference answers were written after visual inspection for this website. They are illustrative examples, not model predictions, source-record transcriptions, or HarborEval labels. English and Chinese text express the same claims. Image pixels and the existing source showcase records are unchanged; the website's questions are maintained separately. Image-source links open the corresponding published image rather than an unrelated source JSON dialogue.
 
 The default English first example and resource links remain readable without JavaScript. Gallery switching and overlays require JavaScript. Existing source resource licenses and usage conditions apply. No external fonts, analytics, or frontend packages are required.

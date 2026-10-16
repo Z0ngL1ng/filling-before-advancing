@@ -1,6 +1,6 @@
 # CPRS grid-based showcase
 
-Eight image-grounded cases, with two cases per sensor, adapted to the project's existing 3 × 3 grid convention. This compact showcase illustrates the [FBA project website](https://z0ngl1ng.github.io/filling-before-advancing/#evidence); it is not a training release or a held-out benchmark.
+Eight image-grounded cases, with two cases per sensor, adapted to the project's existing 3 × 3 grid convention. These images also appear on the [FBA project website](https://z0ngl1ng.github.io/filling-before-advancing/#evidence), which now has its own task-diverse questions and reference answers in [`docs/data/cprs-showcase.json`](../../../docs/data/cprs-showcase.json). The website covers scene interpretation, spatial relations, observability, evidence judgment, rejection and reporting, with a grid only for one localization question. The grid-dialogue records in this directory remain a separate illustrative adaptation; this showcase is not a training release or a held-out benchmark.
 
 | Modality | Source image record IDs | Focus |
 |---|---|---|
@@ -19,13 +19,13 @@ The nine cell names follow the existing project examples:
 | Middle | middle-left | middle-center | middle-right |
 | Bottom | bottom-left | bottom-center | bottom-right |
 
-Questions distinguish the visible extent of a target, the center of a target, and the clearest region. A target may occupy multiple cells. `meta.grid_grounding` records each spatial question's target, answer cells, and selection rule. The website colors the cells of the first spatial answer and lets visitors switch off the grid.
+Questions in this directory distinguish the visible extent of a target, the center of a target, and the clearest region. A target may occupy multiple cells. `meta.grid_grounding` records each spatial question's target, answer cells, and selection rule. The website's independent PAN localization question highlights three cells; other website questions use the original image without a grid.
 
 ## Source and adaptation
 
 The inspected source snapshot contains 8,300 image-dialogue records: RGB 6,659, SAR 1,348, PAN 193, and NIR 100. The original source records have 2–4 dialogue turns. These counts describe the source collection, not the approximately 810K stage-wise CPRS supervision records or the final Scenario-EG export. `profile.json` retains the inspected source counts.
 
-Image pixels are unchanged at 512 × 512. Showcase questions and answers were rewritten after viewing these images with the nine-cell grid; they are illustrative adaptations, rather than verbatim source dialogue or official benchmark annotations. Chinese text on the website translates the adapted English dialogue. Source files remain unchanged.
+Image pixels are unchanged at 512 × 512. The questions and answers in this directory were rewritten after viewing these images with the nine-cell grid; they are illustrative adaptations, rather than verbatim source dialogue or official benchmark annotations. The website maintains its own English and Chinese questions separately. Source files remain unchanged.
 
 Contextual system prompts and environmental metadata are omitted. Public records contain image references, adapted grid dialogue, grid targets, and source object relations. They do not reproduce pixel-coordinate geometry from the original source metadata.
 

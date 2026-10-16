@@ -103,7 +103,7 @@ HarborEval 包含 **1,245 个评测项和 471 幅唯一图像**，其中 **1,154
 
 ### 公开样张
 
-- **优先浏览的源数据展示：** [`examples/dataset_samples/cprs_source_showcase`](examples/dataset_samples/cprs_source_showcase) 提供八个清晰源数据案例，每种传感器两个，包含按图像改写的网格问答、跨格定位与对象关系。项目网页支持切换案例并查看 3×3 网格答案。本次核对的源数据快照包含 8,300 条图像—对话记录（RGB 6,659；SAR 1,348；PAN 193；NIR 100）；该源数据数量与约 810K 条分阶段 CPRS 训练监督采用不同口径。
+- **优先浏览的源数据展示：** [`examples/dataset_samples/cprs_source_showcase`](examples/dataset_samples/cprs_source_showcase) 提供八张清晰源图像，每种传感器两张。项目网页为这些图像重新编写了场景解读、空间关系、传感器可观测性、证据判断、拒答和报告等问题，并保留一个网格定位案例。每张图支持切换两个问题，查看参考回答及其观察线索。本次核对的源数据快照包含 8,300 条图像—对话记录（RGB 6,659；SAR 1,348；PAN 193；NIR 100）；该源数据数量与约 810K 条分阶段 CPRS 训练监督采用不同口径。
 - [`examples/dataset_samples`](examples/dataset_samples) 下原有的三个阶段子目录保留 12 个检查样例，覆盖 CPRS 的三个监督层以及 RGB、SAR、PAN 和 NIR 图像。
 - [`examples/benchmark_samples`](examples/benchmark_samples) 提供来自 HarborEval、OpenEval 和 RSVQA-Harbor 的 6 个仅输入样例。私有参考答案未被公开，已展示的留出样例也会被记录并从后续分数报告中排除。
 
@@ -126,7 +126,7 @@ HarborEval 包含 **1,245 个评测项和 471 幅唯一图像**，其中 **1,154
   </tr>
 </table>
 
-<p><a href="https://z0ngl1ng.github.io/filling-before-advancing/?lang=zh#evidence">在网页中浏览八个案例、切换传感器并查看 3×3 网格答案 →</a></p>
+<p><a href="https://z0ngl1ng.github.io/filling-before-advancing/?lang=zh#evidence">在网页中浏览八张图像、切换问题并查看观察线索 →</a></p>
 
 这些轻量展示包用于说明记录结构和视觉任务覆盖，不代替后续发布的完整资源。
 
